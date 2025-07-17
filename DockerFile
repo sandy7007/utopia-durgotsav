@@ -76,7 +76,7 @@ FROM base AS builder
     # Fix permissions for node_modules
  
 
-    RUN npm build
+    RUN npm run build
 
 
 FROM base AS runner
