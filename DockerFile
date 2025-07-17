@@ -1,5 +1,5 @@
 ARG APP_HOST="0.0.0.0"
-ARG APP_PORT="8080"
+ARG APP_PORT="8081"
 ARG APP_WITH_SSL="false"
 ARG NODE_VERSION="20.9.0"
 ARG NPME_REGISTRY="https://npme.walmart.com/"
@@ -92,7 +92,7 @@ FROM base AS runner
 
     COPY --from=builder /opt/app/ ./
     RUN chown -R 10000:10000 /opt/app/node_modules
-    EXPOSE 8080
+    EXPOSE 8081
 
     # switch to app user
     USER 10000

@@ -49,7 +49,7 @@ deploy:
         wait: 60
         path: "/"
         timeoutSeconds: 5
-        port: 8081
+        port: 8080
         failureThreshold: 3
         initialDelaySeconds: 20
       livenessProbe:
@@ -58,7 +58,7 @@ deploy:
         probeInterval: 30
         wait: 70
         path: "/"
-        port: 8081
+        port: 8080
         failureThreshold: 3
         initialDelaySeconds: 20
         timeoutSeconds: 5
@@ -66,8 +66,8 @@ deploy:
         httpsEnabled: true
         httpsRedirect: false
         pathPrefix: /
-        externalPort: 8081
-        internalPort: 8081
+        externalPort: 8080
+        internalPort: 8080
         gslbdnszone: k8s.glb.us.walmart.net
       scaling:
         enabled: false
