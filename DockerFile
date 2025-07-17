@@ -44,7 +44,6 @@ FROM base AS deps
     #### deps: move package files
 
     COPY ./package.json ./package-lock.json ./
-    COPY ./.scripts ./.scripts
     
    #### deps: install deps
     RUN npm --version
