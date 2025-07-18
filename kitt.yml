@@ -69,10 +69,6 @@ deploy:
         externalPort: 8080
         internalPort: 8080
         gslbdnszone: k8s.glb.us.walmart.net
-      scaling:
-        enabled: false
-        min: 1
-        max: 1
       
 
      
