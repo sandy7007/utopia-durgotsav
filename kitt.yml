@@ -46,7 +46,7 @@ deploy:
         enabled: "true"
         headers: application/json, text/plain, text/html
         probeInterval: 30
-        wait: 60
+        wait: 100
         path: "/"
         timeoutSeconds: 5
         port: 8080
@@ -56,7 +56,7 @@ deploy:
         enabled: "true"
         headers: application/json, text/plain, text/html
         probeInterval: 30
-        wait: 70
+        wait: 110
         path: "/"
         port: 8080
         failureThreshold: 3
