@@ -1,5 +1,5 @@
 {
-  "name": "traceception-dashboard",
+  "name": "traceception-analytics-dashboard",
   "version": "1.0.0",
   "private": true,
   "description": "Dashboard application with multiple data visualization panels and Cosmos DB integration",
