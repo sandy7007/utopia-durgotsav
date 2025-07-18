@@ -29,11 +29,11 @@ deploy:
       stage:
         cnames:
           - "traceception-analytics-stg.walmart.com"
-  namespace: project-traceception
+  namespace: trace-mcp
   stages:
   - name: stage
     target:
-      - cluster_id: "uscentral-stage-az-302"
+      - cluster_id: "uscentral-stage-az-305"
   helm:
     values:
       min:
@@ -70,7 +70,7 @@ deploy:
         internalPort: 8080
         gslbdnszone: k8s.glb.us.walmart.net
       scaling:
-        enabled: true
+        enabled: false
         min: 1
         max: 1
       
