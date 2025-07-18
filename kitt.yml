@@ -13,7 +13,7 @@ setup:
     imageValidation: false
 
 build:
-  artifact: traceception-analytics-dashboard
+  artifact: traceception-analyticsdashboard
   docker:
     app:
       runtime: node
@@ -29,11 +29,11 @@ deploy:
       stage:
         cnames:
           - "traceception-analytics-stg.walmart.com"
-  namespace: trace-mcp
+  namespace: project-traceception
   stages:
   - name: stage
     target:
-      - cluster_id: "uscentral-stage-az-305"
+      - cluster_id: "uscentral-stage-az-302"
   helm:
     values:
       min:
