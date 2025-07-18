@@ -13,7 +13,7 @@ setup:
     imageValidation: false
 
 build:
-  artifact: traceception-analyticsdashboard
+  artifact: traceception-analytics-dashboard
   docker:
     app:
       runtime: node
