@@ -19,9 +19,7 @@
     "start": "react-scripts start",
     "build": "BUILD_PATH='./target' react-scripts build && cp ./package.json ./target && mkdir -p ./target/public && cp ./public/* ./target/public ",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm start\""
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
