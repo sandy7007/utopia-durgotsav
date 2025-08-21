@@ -168,11 +168,11 @@ const mockData = [
   { team: 'POST TXN Web', manager: 'Balaji Maasala', director: 'Prashant Kumar Kaushik', slackChannel: '#post-txn-sprint-sentinel' },
   
   // Ramu Malur
-  { team: 'CNNT Transformer', manager: 'Sumeet Kumar', director: 'Ramu Malur', slackChannel: '#cnnt-sprint-sentinal' },
+  { team: 'CNNT Transformer', manager: 'Sumeet Kumar', director: 'Ramu Malur', slackChannel: '#cnnt-sprint-sentinel' },
   
   // Santos Kumar Das
-  { team: 'IMS Display Forecasting', manager: 'Ilavarasu Jayabalan', director: 'Santos Kumar Das', slackChannel: '#ims-display-forecasting-sprint-sentinal' },
-  
+  { team: 'IMS Display Forecasting', manager: 'Ilavarasu Jayabalan', director: 'Santos Kumar Das', slackChannel: '#ims-display-forecasting-sprint-sentinel' },
+
   // Santosh Kolur
   { team: 'Discovery CX Tools', manager: 'ThirumalaiNatarajan Deivanayagam', director: 'Santosh Kolur', slackChannel: '#discovery-sprint-sentinel' },
   { team: 'Discovery E2E', manager: 'Chethana HB', director: 'Santosh Kolur', slackChannel: '#discovery-sprint-sentinel' },
