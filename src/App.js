@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
+import SprintSentinel from './components/SprintSentinel';
 import './App.css';
 import { getSummarixLikeCount, getSummarixUsageCount, getSummarixUser, getTraceceptionLikeCount, getTraceceptionUsage, getTraceceptionUser } from './data-promise.js';
 
@@ -81,18 +83,25 @@ function App() {
   };
 
   return (
-    <AppContainer>
-      <Header onRefresh={refreshData} />
-      <ContentWrapper>
-        {loading ? (
-          <div className="loading">Loading dashboard data...</div>
-        ) : error ? (
-          <div className="error">Error: {error}</div>
-        ) : (
-          <Dashboard data={dashboardData} />
-        )}
-      </ContentWrapper>
-    </AppContainer>
+    <Router>
+      <AppContainer>
+        <Header onRefresh={refreshData} />
+        <ContentWrapper>
+          <Routes>
+            <Route path="/" element={
+              loading ? (
+                <div className="loading">Loading dashboard data...</div>
+              ) : error ? (
+                <div className="error">Error: {error}</div>
+              ) : (
+                <Dashboard data={dashboardData} />
+              )
+            } />
+            <Route path="/sprint-sentinel" element={<SprintSentinel />} />
+          </Routes>
+        </ContentWrapper>
+      </AppContainer>
+    </Router>
   );
 }
 
