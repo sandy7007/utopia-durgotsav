@@ -120,8 +120,8 @@ const NoResults = styled.div`
   border-radius: 8px;
 `;
 
-// Mock data
-const mockData = [
+// Onboarded Team data
+const onboardedTeamData = [
   // Arunesh Joshi
   { team: 'Lists Gemini', manager: 'Parth Shah', director: 'Arunesh Joshi', slackChannel: '#subscriptions-sprint-sentinel' },
   { team: 'Subscriptions Apollo', manager: 'Suhasini Jeyakumar', director: 'Arunesh Joshi', slackChannel: '#subscriptions-sprint-sentinel' },
@@ -198,7 +198,7 @@ const SprintSentinel = () => {
 
   // Filter data
   const filteredData = useMemo(() => {
-    return mockData.filter(item => 
+    return onboardedTeamData.filter(item => 
       item.team.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.manager.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.director.toLowerCase().includes(searchTerm.toLowerCase()) ||

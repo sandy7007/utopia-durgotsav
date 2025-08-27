@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
@@ -15,6 +15,32 @@ const AppContainer = styled.div`
 const ContentWrapper = styled.div`
   padding-top: 80px;
 `;
+
+// AppContent component that uses useLocation
+function AppContent({ dashboardData, loading, error, refreshData }) {
+  const location = useLocation();
+  const shouldShowHeader = location.pathname !== '/sprint-sentinel';
+
+  return (
+    <AppContainer>
+      {shouldShowHeader && <Header onRefresh={refreshData} />}
+      <ContentWrapper>
+        <Routes>
+          <Route path="/" element={
+            loading ? (
+              <div className="loading">Loading dashboard data...</div>
+            ) : error ? (
+              <div className="error">Error: {error}</div>
+            ) : (
+              <Dashboard data={dashboardData} />
+            )
+          } />
+          <Route path="/sprint-sentinel" element={<SprintSentinel />} />
+        </Routes>
+      </ContentWrapper>
+    </AppContainer>
+  );
+}
 
 function App() {
   const [dashboardData, setDashboardData] = useState(null);
@@ -84,23 +110,12 @@ function App() {
 
   return (
     <Router>
-      <AppContainer>
-        <Header onRefresh={refreshData} />
-        <ContentWrapper>
-          <Routes>
-            <Route path="/" element={
-              loading ? (
-                <div className="loading">Loading dashboard data...</div>
-              ) : error ? (
-                <div className="error">Error: {error}</div>
-              ) : (
-                <Dashboard data={dashboardData} />
-              )
-            } />
-            <Route path="/sprint-sentinel" element={<SprintSentinel />} />
-          </Routes>
-        </ContentWrapper>
-      </AppContainer>
+      <AppContent 
+        dashboardData={dashboardData}
+        loading={loading}
+        error={error}
+        refreshData={refreshData}
+      />
     </Router>
   );
 }
