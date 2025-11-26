@@ -91,7 +91,12 @@ return (
                 color="#2ecc71"
             />
 
-            
+            <NumberCard 
+                title="Total Copycurl Button Hits 📋"
+                number={data.CopycurlButtonHitCountData || "NA"}
+                subtext="Times copied to clipboard"
+                color="#f39c12"
+            />
 
         </DashboardGrid>
     </DashboardContainer>

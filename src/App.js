@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import './App.css';
-import { getSummarixLikeCount, getSummarixUsageCount, getSummarixUser, getTraceceptionLikeCount, getTraceceptionUsage, getTraceceptionUser } from './data-promise.js';
+import { getSummarixLikeCount, getSummarixUsageCount, getSummarixUser, getTraceceptionLikeCount, getTraceceptionUsage, getTraceceptionUser, getCopycurlButtonHitCount } from './data-promise.js';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -33,13 +33,15 @@ function App() {
         summarixUsage,
         traceceptionLikeCount,
         summarixLikeCount,
-        summarixUser
+        summarixUser,
+        copycurlButtonHitCount
       ] = await Promise.all([
         getTraceceptionUsage(),
         getSummarixUsageCount(),
         getTraceceptionLikeCount(),
         getSummarixLikeCount(),
-        getSummarixUser()
+        getSummarixUser(),
+        getCopycurlButtonHitCount()
       ]);
     // Convert traceceptionUsage.count to userDemographics-like format
     const traceceptionUsageData = [
@@ -64,6 +66,7 @@ function App() {
         SummarixLikeCountData: summarixLikeCountData,
         TraceceptionLikeCountData: traceceptionLikeCountData,
         SummarixUserData: summarixUser?.sortedResults || [],
+        CopycurlButtonHitCountData: copycurlButtonHitCount?.count || 0,
     }
       setDashboardData(finalData);
     } catch (err) {
