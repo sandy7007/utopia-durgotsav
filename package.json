@@ -1,8 +1,8 @@
 {
-  "name": "traceception-dashboard",
+  "name": "Utopia Durgotsav",
   "version": "1.0.0",
   "private": true,
-  "description": "Dashboard application with multiple data visualization panels and Cosmos DB integration",
+  "description": "Durgotsav site",
   "dependencies": {
     "@azure/cosmos": "^4.0.0",
     "axios": "^1.5.0",
