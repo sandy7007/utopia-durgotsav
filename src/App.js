@@ -1,126 +1,50 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import Dashboard from './components/Dashboard';
-import Header from './components/Header';
-import SprintSentinel from './components/SprintSentinel';
-import './App.css';
-import { getSummarixLikeCount, getSummarixUsageCount, getSummarixUser, getTraceceptionLikeCount, getTraceceptionUsage, getTraceceptionUser, getCopycurlButtonHitCount } from './data-promise.js';
+import React, { useEffect } from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import TopBar from "./components/TopBar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import CountdownTimer from "./components/CountdownTimer";
+import EventSection from "./components/EventSection";
+import Sponsors from "./components/Sponsors";
+import Gallery from "./components/Gallery";
+import Schedule from "./components/Schedule";
+import Forms from "./components/Forms";
+import Footer from "./components/Footer";
+import { HERO_BG_IMAGE, ABOUT_IMAGE, GALLERY_IMAGES } from "./constants/images";
+import { EVENT_SECTIONS } from "./constants/events";
 
-const AppContainer = styled.div`
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-`;
-
-const ContentWrapper = styled.div`
-  padding-top: 80px;
-`;
-
-// AppContent component that uses useLocation
-function AppContent({ dashboardData, loading, error, refreshData }) {
-  const location = useLocation();
-  const shouldShowHeader = location.pathname !== '/sprint-sentinel';
-
-  return (
-    <AppContainer>
-      {shouldShowHeader && <Header onRefresh={refreshData} />}
-      <ContentWrapper>
-        <Routes>
-          <Route path="/" element={
-            loading ? (
-              <div className="loading">Loading dashboard data...</div>
-            ) : error ? (
-              <div className="error">Error: {error}</div>
-            ) : (
-              <Dashboard data={dashboardData} />
-            )
-          } />
-          <Route path="/sprint-sentinel" element={<SprintSentinel />} />
-        </Routes>
-      </ContentWrapper>
-    </AppContainer>
-  );
-}
-
-function App() {
-  const [dashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const hasRun = useRef(false);
+export default function App() {
+  /* Scroll-reveal: add .visible to .reveal elements when they enter view */
   useEffect(() => {
-    if (hasRun.current) return;
-    hasRun.current = true;
-    fetchDashboardData();
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach(
+          (e) => e.isIntersecting && e.target.classList.add("visible"),
+        ),
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
-  const fetchDashboardData = async () => {
-    try {
-      setLoading(true);
-      const [
-        traceceptionUsage,
-        summarixUsage,
-        traceceptionLikeCount,
-        summarixLikeCount,
-        summarixUser,
-        copycurlButtonHitCount
-      ] = await Promise.all([
-        getTraceceptionUsage(),
-        getSummarixUsageCount(),
-        getTraceceptionLikeCount(),
-        getSummarixLikeCount(),
-        getSummarixUser(),
-        getCopycurlButtonHitCount()
-      ]);
-    // Convert traceceptionUsage.count to userDemographics-like format
-    const traceceptionUsageData = [
-      { name: 'Landed directly', value: traceceptionUsage.count.isDirectSearch, color: '#8884d8' },
-      { name: 'Searched traceid', value: traceceptionUsage.count.isNotDirectSearch, color: '#82ca9d' }
-    ];
-    const summarixUsageData = [
-      { name: 'Slack Bot', value: summarixUsage.count.slackCount, color: '#8884d8' },
-      { name: 'Portal', value: summarixUsage.count.traceceptionPortal, color: '#82ca9d' }
-    ];
-    
-    const summarixLikeCountData = {
-        "countPositive": summarixLikeCount.countPositive,
-        "countNegative": summarixLikeCount.countNegative
-    }
-    const traceceptionLikeCountData = {
-        "count": traceceptionLikeCount.count,
-    }
-    const finalData = {
-        TraceCeptionUsageData: traceceptionUsageData,
-        SummarixUsageData: summarixUsageData,
-        SummarixLikeCountData: summarixLikeCountData,
-        TraceceptionLikeCountData: traceceptionLikeCountData,
-        SummarixUserData: summarixUser?.sortedResults || [],
-        CopycurlButtonHitCountData: copycurlButtonHitCount?.count || 0,
-    }
-      setDashboardData(finalData);
-    } catch (err) {
-      console.error('Error fetching dashboard data:', err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-
-  const refreshData = () => {
-    fetchDashboardData();
-  };
-
   return (
-    <Router>
-      <AppContent 
-        dashboardData={dashboardData}
-        loading={loading}
-        error={error}
-        refreshData={refreshData}
-      />
-    </Router>
+    <div className="App">
+      <TopBar />
+      <Navbar />
+      <Hero heroBgImage={HERO_BG_IMAGE} />
+      <About aboutImage={ABOUT_IMAGE} />
+      <CountdownTimer />
+
+      {EVENT_SECTIONS.map((event) => (
+        <EventSection key={event.id} {...event} />
+      ))}
+
+      <Gallery images={GALLERY_IMAGES} />
+      <Sponsors />
+      <Schedule />
+      <Forms />
+      <Footer />
+    </div>
   );
 }
-
-export default App;

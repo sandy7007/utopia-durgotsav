@@ -1,0 +1,178 @@
+.countdown-section {
+  padding: 5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.countdown-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(139, 0, 0, 0.25) 0%,
+      transparent 70%
+    ),
+    var(--surface);
+}
+
+.countdown-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 215, 0, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.countdown-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.countdown-title {
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+}
+
+.countdown-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+/* venue badge */
+.countdown-venue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 50px;
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.countdown-venue svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  fill: var(--primary);
+}
+
+/* ── Flip grid ── */
+.countdown-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.countdown-sep {
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+  color: rgba(255, 215, 0, 0.45);
+  line-height: 1;
+  margin-top: 0.3rem;
+  align-self: flex-start;
+}
+
+/* ── Flip unit ── */
+.flip-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flip-card {
+  position: relative;
+  width: clamp(70px, 14vw, 100px);
+  height: clamp(70px, 14vw, 100px);
+  border-radius: 12px;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  overflow: hidden;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 215, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-top,
+.flip-bottom {
+  position: absolute;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  width: 100%;
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.flip-top {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.flip-bottom {
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+}
+
+.flip-card.flipping .flip-top {
+  transform: translateY(-80%);
+  opacity: 0;
+}
+.flip-card.flipping .flip-bottom {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+.flip-label {
+  font-size: 0.7rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.countdown-msg {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+  .countdown-sep {
+    font-size: 1.8rem;
+  }
+}

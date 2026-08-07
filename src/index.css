@@ -1,22 +1,229 @@
-* {
+/* =============================================
+   DURGOTSAV — GLOBAL STYLES & CSS VARIABLES
+   ============================================= */
+:root {
+  --primary: #ff6b35;
+  --primary-dark: #e55a25;
+  --secondary: #ffd700;
+  --secondary-dim: #c9a135;
+  --accent: #8b0000;
+  --maroon: #6b1414;
+  --dark: #0a0100;
+  --dark-secondary: #150300;
+  --surface: #1c0505;
+  --surface-2: #280808;
+  --light: #fff8e7;
+  --text-light: #f5deb3;
+  --text-muted: #b8935a;
+  --white: #ffffff;
+
+  --gradient-gold: linear-gradient(
+    135deg,
+    #b8860b 0%,
+    #ffd700 50%,
+    #ffa500 100%
+  );
+  --gradient-fire: linear-gradient(
+    180deg,
+    #ffd700 0%,
+    #ff6b35 60%,
+    #c0392b 100%
+  );
+  --gradient-hero: linear-gradient(
+    135deg,
+    #0a0100 0%,
+    #3d0808 50%,
+    #8b0000 100%
+  );
+  --gradient-section: linear-gradient(180deg, #0a0100, #150300);
+
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glow-gold: 0 0 25px rgba(255, 215, 0, 0.35);
+  --shadow-glow-fire: 0 0 25px rgba(255, 107, 53, 0.4);
+
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 16px;
+  --radius-sm: 8px;
+
+  /* Top announcement bar height — referenced by Navbar and Hero padding */
+  --topbar-h: 44px;
+}
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    "Poppins",
+    -apple-system,
+    BlinkMacSystemFont,
     sans-serif;
+  background-color: var(--dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f7fa;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ── Typography helpers ── */
+.section-title {
+  font-family: "Cinzel", serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  text-align: center;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+/* ── Ornamental divider ── */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.8rem auto 1.5rem;
+}
+.ornament::before,
+.ornament::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--secondary-dim),
+    transparent
+  );
+}
+.ornament-symbol {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+}
+
+/* ── Containers ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  position: relative;
+}
+
+/* ── Scroll-reveal animation classes (toggled by IntersectionObserver) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+.reveal.up {
+  transform: translateY(40px);
+}
+.reveal.left {
+  transform: translateX(-50px);
+}
+.reveal.right {
+  transform: translateX(50px);
+}
+.reveal.scale {
+  transform: scale(0.85);
+}
+.reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.delay-1 {
+  transition-delay: 0.1s !important;
+}
+.delay-2 {
+  transition-delay: 0.2s !important;
+}
+.delay-3 {
+  transition-delay: 0.3s !important;
+}
+.delay-4 {
+  transition-delay: 0.4s !important;
+}
+.delay-5 {
+  transition-delay: 0.5s !important;
+}
+.delay-6 {
+  transition-delay: 0.6s !important;
+}
+.delay-7 {
+  transition-delay: 0.7s !important;
+}
+.delay-8 {
+  transition-delay: 0.8s !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--maroon);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+::selection {
+  background: var(--primary);
+  color: #fff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Dashboard specific styles */
@@ -38,7 +245,9 @@ code {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .chart-panel:hover {

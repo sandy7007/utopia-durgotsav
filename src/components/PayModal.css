@@ -1,0 +1,340 @@
+/* ══════════════════════════════════════════════════════════════════
+   PAYMENT SCANNER MODAL
+   ══════════════════════════════════════════════════════════════════ */
+.pay-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: payFadeIn 0.22s ease;
+}
+
+@keyframes payFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pay-modal {
+  position: relative;
+  background: linear-gradient(160deg, #1a0800 0%, #2d1200 60%, #1a0800 100%);
+  border: 1px solid rgba(245, 208, 96, 0.35);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.75rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(200, 150, 12, 0.12);
+  animation: paySlideUp 0.28s cubic-bezier(0.34, 1.3, 0.64, 1);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+@keyframes paySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pay-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.pay-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f5d060, #c8960c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pay-modal-title svg {
+  width: 20px;
+  height: 20px;
+  stroke: #f5d060;
+  flex-shrink: 0;
+  -webkit-text-fill-color: initial;
+}
+
+.pay-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #ccc;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pay-modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.pay-modal-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pay-scanner-wrap {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px rgba(245, 208, 96, 0.3);
+}
+
+.pay-scanner-img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.pay-modal-hint {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+
+@keyframes noticeGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 208, 96, 0);
+  }
+  50% {
+    box-shadow: 0 0 12px 3px rgba(245, 208, 96, 0.15);
+  }
+}
+
+.pay-modal-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding: 0.65rem 0.9rem;
+  background: rgba(245, 208, 96, 0.07);
+  border: 1px dashed rgba(245, 208, 96, 0.35);
+  border-radius: 10px;
+  animation: noticeGlow 3s ease-in-out infinite;
+}
+
+.pay-modal-notice svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  stroke: #f5d060;
+  opacity: 0.85;
+}
+
+.pay-modal-notice span {
+  font-size: 0.78rem;
+  color: rgba(245, 208, 96, 0.75);
+  line-height: 1.45;
+}
+
+/* ── Donation form inside pay modal ── */
+.don-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.4rem 0 1rem;
+  color: rgba(245, 208, 96, 0.55);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.don-divider::before,
+.don-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(245, 208, 96, 0.2);
+}
+
+.don-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.don-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.don-row label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.03em;
+}
+
+.don-row input[type="text"],
+.don-row input[type="date"] {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 208, 96, 0.25);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.2s;
+  outline: none;
+  color-scheme: dark;
+}
+
+.don-row input[type="text"]:focus,
+.don-row input[type="date"]:focus {
+  border-color: rgba(245, 208, 96, 0.6);
+}
+
+.don-file-input {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.don-file-input::file-selector-button {
+  background: rgba(245, 208, 96, 0.1);
+  border: 1px solid rgba(245, 208, 96, 0.35);
+  border-radius: 6px;
+  color: #f5d060;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-right: 0.5rem;
+}
+
+.don-file-input::file-selector-button:hover {
+  background: rgba(245, 208, 96, 0.2);
+}
+
+.don-help {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.don-field-error {
+  font-size: 0.72rem;
+  color: #ff7b7b;
+}
+
+.don-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding: 0.65rem 1.2rem;
+  background: linear-gradient(90deg, #c8960c, #f5d060, #c8960c);
+  background-size: 200% 100%;
+  border: none;
+  border-radius: 10px;
+  color: #1a0800;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition:
+    background-position 0.4s ease,
+    opacity 0.2s;
+}
+
+.don-submit-btn:hover:not(:disabled) {
+  background-position: right center;
+}
+
+.don-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes donSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.don-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(26, 8, 0, 0.35);
+  border-top-color: #1a0800;
+  border-radius: 50%;
+  animation: donSpin 0.7s linear infinite;
+}
+
+/* Success state */
+.don-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.don-success svg {
+  width: 52px;
+  height: 52px;
+}
+
+.fsi-circle {
+  stroke: #4caf50;
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 0;
+}
+
+.fsi-check {
+  stroke: #4caf50;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.don-success p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}

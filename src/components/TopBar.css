@@ -1,0 +1,247 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-h);
+  z-index: 1100; /* above Navbar (z-index 900) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    90deg,
+    #3d0808 0%,
+    #7b1a00 20%,
+    #c0392b 50%,
+    #7b1a00 80%,
+    #3d0808 100%
+  );
+  border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+  overflow: hidden;
+  padding: 0 3rem 0 1rem;
+}
+
+/* subtle shimmer sweep */
+.topbar-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.08) 40%,
+    rgba(255, 215, 0, 0.12) 50%,
+    rgba(255, 215, 0, 0.08) 60%,
+    transparent 100%
+  );
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateX(-10%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10%);
+  }
+}
+
+/* content row */
+.topbar-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+
+.topbar-diya {
+  font-size: 1rem;
+  animation: diYaFlicker 2.5s ease-in-out infinite;
+}
+
+@keyframes diYaFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.9;
+  }
+}
+
+.topbar-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-light);
+}
+
+.topbar-date {
+  color: rgba(255, 215, 0, 0.7);
+  font-size: 0.72rem;
+}
+
+.topbar-dot {
+  color: rgba(255, 215, 0, 0.4);
+}
+
+/* venue */
+.topbar-venue {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  color: rgba(255, 215, 0, 0.85);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.topbar-pin {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  fill: var(--primary);
+  opacity: 0.9;
+}
+
+.topbar-vr {
+  display: block;
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 215, 0, 0.25);
+  flex-shrink: 0;
+}
+
+/* countdown units */
+.topbar-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.topbar-unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.topbar-unit strong {
+  font-family: "Cinzel", serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  min-width: 1.6ch;
+  text-align: center;
+  display: inline-block;
+}
+
+.topbar-unit em {
+  font-style: normal;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* seconds pulse */
+.topbar-unit--sec strong {
+  animation: secondTick 1s ease-in-out infinite;
+}
+
+@keyframes secondTick {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.topbar-colon {
+  color: rgba(255, 215, 0, 0.5);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.topbar-tag {
+  font-size: 0.7rem;
+  color: rgba(255, 215, 0, 0.65);
+  letter-spacing: 0.5px;
+}
+
+.topbar-visitors {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: rgba(255, 215, 0, 0.65);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.topbar-visitors svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* dismiss button */
+.topbar-close {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  line-height: 1;
+  transition: color 0.2s;
+  z-index: 2;
+}
+
+.topbar-close:hover {
+  color: var(--secondary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .topbar {
+    padding: 0 2.5rem 0 0.75rem;
+  }
+  .topbar-content {
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+  .topbar-date,
+  .topbar-venue,
+  .topbar-tag,
+  .topbar-dot,
+  .topbar-visitors {
+    display: none;
+  }
+  .topbar-unit strong {
+    font-size: 0.82rem;
+  }
+}
