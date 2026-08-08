@@ -5,11 +5,11 @@
    ───────────────────────────────────────────────────────────── */
 
 /** JS Date object for the countdown target (Durga Puja 2026 Saptami) */
-export const FESTIVAL_TARGET_DATE = new Date("2026-10-17T00:00:00");
+export const FESTIVAL_TARGET_DATE = new Date("2026-10-16T00:00:00");
 
 /** Human-readable display strings */
 export const FESTIVAL_YEAR = "2026";
-export const FESTIVAL_DATE_DISPLAY = "Oct 17, 2026";
+export const FESTIVAL_DATE_DISPLAY = "Oct 16, 2026";
 export const FESTIVAL_NAME = "Durga Puja";
 
 /** Venue */
