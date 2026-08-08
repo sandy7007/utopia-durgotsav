@@ -124,7 +124,7 @@ export default function TopBar() {
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                 <circle cx="12" cy="12" r="3" />
               </svg>
-              {visitors.toLocaleString()} visitors so far
+              {visitors.toLocaleString()} site visits so far
             </span>
           </>
         )}
