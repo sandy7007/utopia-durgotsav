@@ -70,11 +70,12 @@ export default function About({ aboutImage }) {
           >
             <h3 className="about-subheading">A Legacy Born From Love</h3>
             <p>
-              Founded in <strong>{COMMITTEE_INFO.foundedYear}</strong>, the {COMMITTEE_INFO.name}
-              began as a small neighbourhood gathering of devotees in the spirit
-              of celebrating Ma Durga. Over the last couple of years, our puja
-              has grown into one of the most beloved community festivals of the
-              area — touching thousands of hearts every year.
+              Founded in <strong>{COMMITTEE_INFO.foundedYear}</strong>, the{" "}
+              {COMMITTEE_INFO.name}&nbsp;began as a small neighbourhood
+              gathering of devotees in the spirit of celebrating Ma Durga. Over
+              the last couple of years, our puja has grown into one of the most
+              beloved community festivals of the area — touching thousands of
+              hearts every year.
             </p>
             <p>
               We believe that a festival is not just a ritual — it is a living
