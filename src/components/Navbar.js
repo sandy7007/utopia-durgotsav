@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { NAV_LINKS } from "../constants/navigation";
-import PayModal from "./PayModal";
 
-export default function Navbar() {
+export default function Navbar({ onPayClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("home");
-  const [payOpen, setPayOpen] = useState(false);
 
   const openPay = () => {
     setMenuOpen(false);
-    setPayOpen(true);
+    onPayClick();
   };
-  const closePay = useCallback(() => setPayOpen(false), []);
 
   /* scroll-shadow */
   useEffect(() => {
@@ -138,9 +135,6 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
-
-      {/* ── Payment Scanner Modal ── */}
-      <PayModal isOpen={payOpen} onClose={closePay} />
     </>
   );
 }

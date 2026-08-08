@@ -228,14 +228,34 @@
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .topbar {
-    padding: 0 2.5rem 0 0.75rem;
+    height: auto;
+    min-height: var(--topbar-h);
+    padding: 5px 2.5rem 5px 0.75rem;
+    overflow: hidden;
   }
   .topbar-content {
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem 0.5rem;
     font-size: 0.72rem;
+    row-gap: 0;
+  }
+  /* Row 1: label + venue */
+  .topbar-label,
+  .topbar-venue {
+    flex-shrink: 0;
+  }
+  /* Countdown fills its own row */
+  .topbar-countdown {
+    width: 100%;
+    justify-content: center;
+    padding-top: 2px;
+  }
+  /* Hide the vertical divider before countdown on mobile */
+  .topbar-vr:last-of-type {
+    display: none;
   }
   .topbar-date,
-  .topbar-venue,
   .topbar-tag,
   .topbar-dot,
   .topbar-visitors {

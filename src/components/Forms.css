@@ -78,6 +78,28 @@
   box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
 }
 
+.forms-tab-btn.disabled,
+.forms-tab-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.tab-coming-soon {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  color: #1a0a00;
+  padding: 1px 5px;
+  border-radius: 4px;
+  vertical-align: middle;
+  line-height: 1.6;
+}
+
 /* ── Hint ── */
 .forms-hint {
   position: relative;

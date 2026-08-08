@@ -49,6 +49,13 @@
   --topbar-h: 44px;
 }
 
+/* Two-row topbar on mobile */
+@media (max-width: 600px) {
+  :root {
+    --topbar-h: 76px;
+  }
+}
+
 *,
 *::before,
 *::after {

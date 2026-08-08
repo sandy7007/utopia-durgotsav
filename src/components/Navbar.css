@@ -180,7 +180,9 @@
     inset: 0 0 0 auto;
     top: var(--topbar-h); /* align with shifted navbar on mobile */
     width: min(280px, 85vw);
-    height: 100vh;
+    height: calc(100vh - var(--topbar-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: rgba(8, 1, 0, 0.97);
     backdrop-filter: blur(20px);
     flex-direction: column;

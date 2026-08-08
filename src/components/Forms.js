@@ -2,39 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./Forms.css";
-
-/* ─── API ─────────────────────────────────────────────────────── */
-const FORM_API_ENDPOINT =
-  "https://unrenh5oj3.execute-api.eu-north-1.amazonaws.com/prod/submit";
-
-/* ─── Constants ──────────────────────────────────────────────── */
-const TABS = [
-  // { key: "registration", label: "Registration" },
-  //   { key: "cultural", label: "Cultural" },
-  // { key: "pujaRituals", label: "Puja Rituals" },
-  //   { key: "bhogCoupons", label: "Bhog Coupons" },
-  // { key: "events", label: "Events" },
-];
-
-const BLOCKS = ["Eden", "Serene", "Halcyon", "Paradise", "Tranquil"];
-
-function getTowersForBlock(block) {
-  const T = Array.from({ length: 17 }, (_, i) => String.fromCharCode(65 + i));
-  const map = {
-    Eden: T.slice(0, 5),
-    Serene: T.slice(0, 8),
-    Halcyon: T.slice(8, 10),
-    Tranquil: T.slice(10),
-    Paradise: T.slice(5, 12),
-  };
-  return map[block] || [];
-}
-
-/* ─── Validation ─────────────────────────────────────────────── */
-const NAME_RE = /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/;
-const MOBILE_RE = /^[6-9]\d{9}$/;
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const APT_RE = /^\d{1,4}$/;
+import {
+  FORM_API_ENDPOINT,
+  TABS,
+  BLOCKS,
+  getTowersForBlock,
+  NAME_RE,
+  MOBILE_RE,
+  EMAIL_RE,
+  APT_RE,
+} from "../constants/forms";
 
 function validateImageFile(file) {
   if (!file) return null;
@@ -180,7 +157,7 @@ export default function Forms() {
     else if (!EMAIL_RE.test(email)) errs.email = "Invalid email address";
 
     /* Tab-specific validation */
-    /* if (activeTab === "registration") {
+    if (activeTab === "registration") {
       if (!get("block")) errs.block = "Required";
       if (!get("tower")) errs.tower = "Required";
       const apt = get("apartment");
@@ -194,7 +171,7 @@ export default function Forms() {
         const e = validateImageFile(imgFile);
         if (e) errs.imageProof = e;
       }
-    } */
+    }
 
     if (activeTab === "cultural") {
       if (!get("block")) errs.block = "Required";
@@ -209,25 +186,46 @@ export default function Forms() {
         errs.participantCount = "Must be at least 1";
     }
 
-    /* if (activeTab === "pujaRituals") {
+    if (activeTab === "pujaRituals") {
+      if (!get("block")) errs.block = "Required";
+      if (!get("tower")) errs.tower = "Required";
+      const aptP = get("apartment");
+      const first2P = Number(aptP.length >= 2 ? aptP.slice(0, 2) : aptP);
+      if (!aptP) errs.apartment = "Required";
+      else if (!APT_RE.test(aptP) || Number(aptP) < 1 || first2P > 26)
+        errs.apartment = "Invalid (4 digits, first 2 ≤ 26)";
       if (!get("ritualType")) errs.ritualType = "Required";
       if (!get("preferredDay")) errs.preferredDay = "Required";
       if (!get("timeOfDay")) errs.timeOfDay = "Required";
-    } */
+    }
 
-    /* if (activeTab === "bhogCoupons") {
+    if (activeTab === "bhogCoupons") {
+      if (!get("block")) errs.block = "Required";
+      if (!get("tower")) errs.tower = "Required";
+      const aptB = get("apartment");
+      const first2B = Number(aptB.length >= 2 ? aptB.slice(0, 2) : aptB);
+      if (!aptB) errs.apartment = "Required";
+      else if (!APT_RE.test(aptB) || Number(aptB) < 1 || first2B > 26)
+        errs.apartment = "Invalid (4 digits, first 2 ≤ 26)";
       if (!get("couponCount") || Number(get("couponCount")) < 1)
         errs.couponCount = "Must be at least 1";
       if (!get("puja")) errs.puja = "Required";
       if (get("puja") === "Durga Puja" && !get("pickupDay"))
         errs.pickupDay = "Required";
-    } */
+    }
 
-    /* if (activeTab === "events") {
+    if (activeTab === "events") {
+      if (!get("block")) errs.block = "Required";
+      if (!get("tower")) errs.tower = "Required";
+      const aptE = get("apartment");
+      const first2E = Number(aptE.length >= 2 ? aptE.slice(0, 2) : aptE);
+      if (!aptE) errs.apartment = "Required";
+      else if (!APT_RE.test(aptE) || Number(aptE) < 1 || first2E > 26)
+        errs.apartment = "Invalid (4 digits, first 2 ≤ 26)";
       if (!get("eventType")) errs.eventType = "Required";
       if (!get("seatCount") || Number(get("seatCount")) < 1)
         errs.seatCount = "Must be at least 1";
-    } */
+    }
 
     if (Object.keys(errs).length) {
       setErrors(errs);
@@ -276,12 +274,12 @@ export default function Forms() {
   function getTabPayload(fd) {
     const get = (k) => String(fd.get(k) || "").trim();
     switch (activeTab) {
-      /* case "registration":
+      case "registration":
         return {
           block: get("block"),
           tower: get("tower"),
           apartment: get("apartment"),
-        }; */
+        };
       case "cultural":
         return {
           block: get("block"),
@@ -290,20 +288,32 @@ export default function Forms() {
           performanceCategory: get("performanceCategory"),
           participantCount: get("participantCount"),
         };
-      /* case "pujaRituals":
+      case "pujaRituals":
         return {
+          block: get("block"),
+          tower: get("tower"),
+          apartment: get("apartment"),
           ritualType: get("ritualType"),
           preferredDay: get("preferredDay"),
           timeOfDay: get("timeOfDay"),
         };
       case "bhogCoupons":
         return {
+          block: get("block"),
+          tower: get("tower"),
+          apartment: get("apartment"),
           couponCount: get("couponCount"),
           puja: get("puja"),
           pickupDay: get("pickupDay"),
         };
       case "events":
-        return { eventType: get("eventType"), seatCount: get("seatCount") }; */
+        return {
+          block: get("block"),
+          tower: get("tower"),
+          apartment: get("apartment"),
+          eventType: get("eventType"),
+          seatCount: get("seatCount"),
+        };
       default:
         return {};
     }
@@ -338,10 +348,15 @@ export default function Forms() {
               key={tab.key}
               role="tab"
               aria-selected={activeTab === tab.key}
-              className={`forms-tab-btn${activeTab === tab.key ? " active" : ""}`}
-              onClick={() => setActiveTab(tab.key)}
+              aria-disabled={tab.disabled}
+              disabled={tab.disabled}
+              className={`forms-tab-btn${activeTab === tab.key ? " active" : ""}${tab.disabled ? " disabled" : ""}`}
+              onClick={() => !tab.disabled && setActiveTab(tab.key)}
             >
               {tab.label}
+              {tab.disabled && (
+                <span className="tab-coming-soon">Coming Soon</span>
+              )}
             </button>
           ))}
         </div>
@@ -456,7 +471,7 @@ export default function Forms() {
                   </div>
 
                   {/* ── Registration ── */}
-                  {activeTab === "DISABLED_registration" && (
+                  {activeTab === "registration" && (
                     <>
                       <div className="form-row">
                         <label>
@@ -538,8 +553,68 @@ export default function Forms() {
                   )}
 
                   {/* ── Puja Rituals ── */}
-                  {activeTab === "DISABLED_pujaRituals" && (
+                  {activeTab === "pujaRituals" && (
                     <>
+                      <div className="form-row">
+                        <label>
+                          Block <span className="req">*</span>
+                        </label>
+                        <select
+                          name="block"
+                          value={block}
+                          onChange={(e) => {
+                            setBlock(e.target.value);
+                            clearErr("block");
+                          }}
+                          defaultValue=""
+                        >
+                          <option value="" disabled>
+                            Please select
+                          </option>
+                          {BLOCKS.map((b) => (
+                            <option key={b}>{b}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.block} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Tower <span className="req">*</span>
+                        </label>
+                        <select
+                          name="tower"
+                          disabled={!towers.length}
+                          onChange={() => clearErr("tower")}
+                          defaultValue=""
+                        >
+                          <option value="">
+                            {towers.length
+                              ? "Please select"
+                              : "Select block first"}
+                          </option>
+                          {towers.map((t) => (
+                            <option key={t}>{t}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.tower} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Apartment Number <span className="req">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="apartment"
+                          placeholder="e.g. 1204"
+                          maxLength={4}
+                          inputMode="numeric"
+                          onChange={() => clearErr("apartment")}
+                        />
+                        <FieldError msg={errors.apartment} />
+                      </div>
+
                       <div className="form-row">
                         <label>
                           Ritual Type <span className="req">*</span>
@@ -607,8 +682,68 @@ export default function Forms() {
                   )}
 
                   {/* ── Bhog Coupons ── */}
-                  {activeTab === "DISABLED_bhogCoupons" && (
+                  {activeTab === "bhogCoupons" && (
                     <>
+                      <div className="form-row">
+                        <label>
+                          Block <span className="req">*</span>
+                        </label>
+                        <select
+                          name="block"
+                          value={block}
+                          onChange={(e) => {
+                            setBlock(e.target.value);
+                            clearErr("block");
+                          }}
+                          defaultValue=""
+                        >
+                          <option value="" disabled>
+                            Please select
+                          </option>
+                          {BLOCKS.map((b) => (
+                            <option key={b}>{b}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.block} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Tower <span className="req">*</span>
+                        </label>
+                        <select
+                          name="tower"
+                          disabled={!towers.length}
+                          onChange={() => clearErr("tower")}
+                          defaultValue=""
+                        >
+                          <option value="">
+                            {towers.length
+                              ? "Please select"
+                              : "Select block first"}
+                          </option>
+                          {towers.map((t) => (
+                            <option key={t}>{t}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.tower} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Apartment Number <span className="req">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="apartment"
+                          placeholder="e.g. 1204"
+                          maxLength={4}
+                          inputMode="numeric"
+                          onChange={() => clearErr("apartment")}
+                        />
+                        <FieldError msg={errors.apartment} />
+                      </div>
+
                       <div className="form-row">
                         <label>
                           Coupon Quantity <span className="req">*</span>
@@ -672,8 +807,68 @@ export default function Forms() {
                   )}
 
                   {/* ── Events ── */}
-                  {activeTab === "DISABLED_events" && (
+                  {activeTab === "events" && (
                     <>
+                      <div className="form-row">
+                        <label>
+                          Block <span className="req">*</span>
+                        </label>
+                        <select
+                          name="block"
+                          value={block}
+                          onChange={(e) => {
+                            setBlock(e.target.value);
+                            clearErr("block");
+                          }}
+                          defaultValue=""
+                        >
+                          <option value="" disabled>
+                            Please select
+                          </option>
+                          {BLOCKS.map((b) => (
+                            <option key={b}>{b}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.block} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Tower <span className="req">*</span>
+                        </label>
+                        <select
+                          name="tower"
+                          disabled={!towers.length}
+                          onChange={() => clearErr("tower")}
+                          defaultValue=""
+                        >
+                          <option value="">
+                            {towers.length
+                              ? "Please select"
+                              : "Select block first"}
+                          </option>
+                          {towers.map((t) => (
+                            <option key={t}>{t}</option>
+                          ))}
+                        </select>
+                        <FieldError msg={errors.tower} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Apartment Number <span className="req">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="apartment"
+                          placeholder="e.g. 1204"
+                          maxLength={4}
+                          inputMode="numeric"
+                          onChange={() => clearErr("apartment")}
+                        />
+                        <FieldError msg={errors.apartment} />
+                      </div>
+
                       <div className="form-row">
                         <label>
                           Event Type <span className="req">*</span>

@@ -26,7 +26,7 @@ function getTimeLeft() {
 export default function TopBar() {
   const [time, setTime] = useState(getTimeLeft());
   const [dismissed, setDismissed] = useState(false);
-  const [visitors, setVisitors] = useState(121);
+  //   const [visitors, setVisitors] = useState(121);
 
   useEffect(() => {
     const id = setInterval(() => setTime(getTimeLeft()), 1000);
@@ -107,7 +107,7 @@ export default function TopBar() {
 
         <span className="topbar-tag">to go!</span>
 
-        {visitors !== null && (
+        {/* {visitors !== null && (
           <>
             <span className="topbar-vr" aria-hidden="true" />
             <span
@@ -127,7 +127,7 @@ export default function TopBar() {
               {visitors.toLocaleString()} site visits so far
             </span>
           </>
-        )}
+        )} */}
       </div>
 
       {/* Dismiss */}

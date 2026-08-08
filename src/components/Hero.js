@@ -7,7 +7,7 @@ function Spark({ style }) {
   return <div className="spark" style={style} />;
 }
 
-export default function Hero({ heroBgImage }) {
+export default function Hero({ heroBgImage, onPayClick }) {
   const containerRef = useRef(null);
 
   /* stable random sparks – generated once */
@@ -103,7 +103,7 @@ export default function Hero({ heroBgImage }) {
           initial="hidden"
           animate="visible"
         >
-          D U R G O T S A V
+          UTOPIA <br />D U R G O T S A V
         </motion.h2>
 
         <motion.div
@@ -114,7 +114,7 @@ export default function Hero({ heroBgImage }) {
           animate="visible"
         >
           <span className="hd-line" />
-          <span className="hd-om">ॐ</span>
+          <img src="/logo.png" alt="Utopia Durgotsav" className="hd-logo" />
           <span className="hd-line" />
         </motion.div>
 
@@ -159,6 +159,23 @@ export default function Hero({ heroBgImage }) {
           <a href="#gallery" className="hero-btn hero-btn--ghost">
             View Gallery
           </a>
+          <button
+            className="hero-btn hero-btn--pay hero-pay-mobile"
+            onClick={onPayClick}
+            aria-label="Open payment / donation"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <path d="M2 10h20" />
+            </svg>
+            Pay / Donate
+          </button>
         </motion.div>
       </div>
 

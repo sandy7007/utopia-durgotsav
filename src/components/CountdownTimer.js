@@ -72,9 +72,11 @@ export default function CountdownTimer() {
           transition={{ duration: 0.9 }}
         >
           <p className="countdown-eyebrow">✦ Get Ready ✦</p>
-          <h2 className="countdown-title">{FESTIVAL_NAME} {FESTIVAL_YEAR}</h2>
+          <h2 className="countdown-title">
+            {FESTIVAL_NAME} {FESTIVAL_YEAR}
+          </h2>
           <p className="countdown-sub">
-            Mahasaptami &nbsp;·&nbsp; {FESTIVAL_DATE_DISPLAY}
+            Sashti &nbsp;·&nbsp; {FESTIVAL_DATE_DISPLAY}
           </p>
 
           <div className="countdown-venue">
