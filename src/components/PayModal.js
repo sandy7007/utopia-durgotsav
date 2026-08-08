@@ -281,6 +281,7 @@ export default function PayModal({ isOpen, onClose }) {
               <label>Type of Contribution</label>
               <select
                 value={don.contributionType}
+                disabled={!CONTRIBUTION_TYPES.length}
                 onChange={(e) =>
                   setDon((p) => ({ ...p, contributionType: e.target.value }))
                 }

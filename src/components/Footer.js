@@ -51,15 +51,18 @@ export default function Footer() {
             {/* Socials */}
             <div className="footer-socials">
               {SOCIALS.map(({ name, href, icon }) => (
-                <a
-                  key={name}
-                  href={href}
-                  className="social-btn"
-                  aria-label={name}
-                  rel="noopener noreferrer"
-                >
-                  {icon}
-                </a>
+                <>
+                  <a
+                    key={name}
+                    href={href}
+                    className="social-btn"
+                    aria-label={name}
+                    rel="noopener noreferrer"
+                  >
+                    {icon}
+                  </a>
+                  <span>Follow us on Instagram</span>
+                </>
               ))}
             </div>
           </div>

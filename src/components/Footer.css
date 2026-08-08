@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  padding: 5rem 1.5rem 2rem;
+  padding: 4rem 1.5rem 2rem;
   overflow: hidden;
   background: linear-gradient(180deg, var(--dark) 0%, #050000 100%);
   border-top: 1px solid rgba(255, 215, 0, 0.1);
@@ -70,6 +70,7 @@
 .footer-socials {
   display: flex;
   gap: 0.7rem;
+  align-items: center;
 }
 
 .social-btn {
