@@ -53,17 +53,22 @@ export default function PayModal({ isOpen, onClose }) {
     if (!amount) errs.amount = "Required";
     else if (!/^\d+$/.test(amount)) errs.amount = "Numbers only";
 
-    if (!transactionId) errs.transactionId = "Required";
-    else if (!/^[A-Za-z0-9]+$/.test(transactionId))
-      errs.transactionId = "Letters and numbers only";
+    const hasId = transactionId.trim().length > 0;
+    const hasFile = !!donFile;
 
-    if (!donFile) {
-      errs.attachment = "Required";
+    if (!hasId && !hasFile) {
+      errs.transactionId =
+        "Provide at least one: Transaction ID or a screenshot";
+      errs.attachment = "Provide at least one: Transaction ID or a screenshot";
     } else {
-      const okType = ["image/png", "image/jpeg"].includes(donFile.type);
-      const okExt = /\.(png|jpe?g)$/i.test(donFile.name);
-      if (!okType && !okExt) errs.attachment = "Only PNG or JPG/JPEG allowed";
-      else if (donFile.size > 5 * 1024 * 1024) errs.attachment = "Max 5 MB";
+      if (hasId && !/^[A-Za-z0-9]+$/.test(transactionId.trim()))
+        errs.transactionId = "Letters and numbers only";
+      if (hasFile) {
+        const okType = ["image/png", "image/jpeg"].includes(donFile.type);
+        const okExt = /\.(png|jpe?g)$/i.test(donFile.name);
+        if (!okType && !okExt) errs.attachment = "Only PNG or JPG/JPEG allowed";
+        else if (donFile.size > 5 * 1024 * 1024) errs.attachment = "Max 5 MB";
+      }
     }
 
     if (Object.keys(errs).length) {
@@ -73,22 +78,25 @@ export default function PayModal({ isOpen, onClose }) {
     setDonErrors({});
     setDonLoading(true);
     try {
-      const dataUrl = await new Promise((res, rej) => {
-        const reader = new FileReader();
-        reader.onload = () => res(String(reader.result || ""));
-        reader.onerror = () => rej(new Error("Could not read file"));
-        reader.readAsDataURL(donFile);
-      });
-      const base64Data = dataUrl.includes(",") ? dataUrl.split(",")[1] : "";
-      const safeFileName = donFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const attachment = {
-        fileName: safeFileName,
-        contentType: donFile.type || "application/octet-stream",
-        base64Data,
-        sizeBytes: donFile.size,
-        s3Key: `Form submission/Attachments/donation/${Date.now()}_${safeFileName}`,
-        s3Bucket: "utopia-durgotsav-website",
-      };
+      let attachment = null;
+      if (donFile) {
+        const dataUrl = await new Promise((res, rej) => {
+          const reader = new FileReader();
+          reader.onload = () => res(String(reader.result || ""));
+          reader.onerror = () => rej(new Error("Could not read file"));
+          reader.readAsDataURL(donFile);
+        });
+        const base64Data = dataUrl.includes(",") ? dataUrl.split(",")[1] : "";
+        const safeFileName = donFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        attachment = {
+          fileName: safeFileName,
+          contentType: donFile.type || "application/octet-stream",
+          base64Data,
+          sizeBytes: donFile.size,
+          s3Key: `Form submission/Attachments/donation/${Date.now()}_${safeFileName}`,
+          s3Bucket: "utopia-durgotsav-website",
+        };
+      }
       const res = await fetch(
         "https://unrenh5oj3.execute-api.eu-north-1.amazonaws.com/prod/submit",
         {
@@ -98,8 +106,10 @@ export default function PayModal({ isOpen, onClose }) {
             formType: "donation",
             transactionDate,
             amount,
-            transactionId,
-            attachment,
+            ...(transactionId.trim()
+              ? { transactionId: transactionId.trim() }
+              : {}),
+            ...(attachment ? { attachment } : {}),
             createdAt: new Date().toISOString(),
           }),
         },
@@ -236,7 +246,10 @@ export default function PayModal({ isOpen, onClose }) {
             </div>
 
             <div className="don-row">
-              <label>Transaction ID</label>
+              <label>
+                Transaction ID{" "}
+                <span className="don-either">(or screenshot below)</span>
+              </label>
               <input
                 type="text"
                 placeholder="e.g. TXN123ABC"
@@ -258,7 +271,10 @@ export default function PayModal({ isOpen, onClose }) {
             </div>
 
             <div className="don-row">
-              <label>Payment Screenshot</label>
+              <label>
+                Payment Screenshot{" "}
+                <span className="don-either">(or Transaction ID above)</span>
+              </label>
               <input
                 type="file"
                 accept=".png,.jpg,.jpeg,image/png,image/jpeg"

@@ -212,6 +212,12 @@ export default function Forms() {
       if (!get("puja")) errs.puja = "Required";
       if (get("puja") === "Durga Puja" && !get("pickupDay"))
         errs.pickupDay = "Required";
+      const imgFileBhog = form.elements.imageProof?.files?.[0];
+      if (!imgFileBhog) errs.imageProof = "Please upload a payment screenshot";
+      else {
+        const e = validateImageFile(imgFileBhog);
+        if (e) errs.imageProof = e;
+      }
     }
 
     if (activeTab === "events") {
@@ -236,7 +242,7 @@ export default function Forms() {
     setLoading(true);
     try {
       const imgFile =
-        activeTab === "registration"
+        activeTab === "registration" || activeTab === "bhogCoupons"
           ? form.elements.imageProof?.files?.[0]
           : null;
       const attachment = await buildAttachment(imgFile, activeTab);
@@ -535,7 +541,8 @@ export default function Forms() {
 
                       <div className="form-row">
                         <label>
-                          Resident Proof Image <span className="req">*</span>
+                          Resident Proof Image (belong/mygate){" "}
+                          <span className="req">*</span>
                         </label>
                         <input
                           type="file"
@@ -786,7 +793,8 @@ export default function Forms() {
                       {selectedPuja === "Durga Puja" && (
                         <div className="form-row">
                           <label>
-                            Pickup Day <span className="req">*</span>
+                            Pickup Day (Will be available from committee stalls)
+                            <span className="req">*</span>
                           </label>
                           <select
                             name="pickupDay"
@@ -803,6 +811,23 @@ export default function Forms() {
                           <FieldError msg={errors.pickupDay} />
                         </div>
                       )}
+
+                      <div className="form-row">
+                        <label>
+                          Payment Screenshot <span className="req">*</span>
+                        </label>
+                        <input
+                          type="file"
+                          name="imageProof"
+                          accept=".png,.jpg,.jpeg,image/png,image/jpeg"
+                          onChange={() => clearErr("imageProof")}
+                          className="file-input"
+                        />
+                        <span className="form-help">
+                          PNG or JPG/JPEG · max 5 MB
+                        </span>
+                        <FieldError msg={errors.imageProof} />
+                      </div>
                     </>
                   )}
 

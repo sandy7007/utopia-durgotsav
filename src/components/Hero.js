@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
+import { ANNOUNCEMENT_BUTTON } from "../constants/navigation";
 import "./Hero.css";
 
 /* ── Floating spark particle ── */
@@ -159,6 +160,27 @@ export default function Hero({ heroBgImage, onPayClick }) {
           <a href="#gallery" className="hero-btn hero-btn--ghost">
             View Gallery
           </a>
+          {ANNOUNCEMENT_BUTTON.enabled && (
+            <a
+              href={ANNOUNCEMENT_BUTTON.href}
+              className="hero-btn hero-btn--announce"
+            >
+              <span className="announce-pulse" aria-hidden="true" />
+              <span className="announce-inner">
+                <span className="announce-label">
+                  {ANNOUNCEMENT_BUTTON.label}
+                </span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          )}
           <button
             className="hero-btn hero-btn--pay hero-pay-mobile"
             onClick={onPayClick}

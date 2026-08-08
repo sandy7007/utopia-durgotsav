@@ -37,3 +37,14 @@ export const SOCIAL_LINKS = [
   { name: "YouTube", href: "#" },
   { name: "WhatsApp", href: "#" },
 ];
+
+/* ─────────────────────────────────────────────────────────────
+   ANNOUNCEMENT BUTTON
+   Set enabled: true to show a highlighted CTA button in the
+   Hero section. Point href at any navigation anchor.
+   ───────────────────────────────────────────────────────────── */
+export const ANNOUNCEMENT_BUTTON = {
+  enabled: true, // ← flip to true to show
+  label: "Bhog coupon available",
+  href: "#forms", // ← target section anchor
+};

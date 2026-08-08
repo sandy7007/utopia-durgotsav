@@ -253,6 +253,13 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
+.don-either {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(255, 215, 0, 0.55);
+  font-style: italic;
+}
+
 .don-field-error {
   font-size: 0.72rem;
   color: #ff7b7b;
