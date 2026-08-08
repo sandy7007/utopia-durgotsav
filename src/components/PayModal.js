@@ -1,23 +1,44 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import {
+  BLOCKS,
+  getTowersForBlock,
+  CONTRIBUTION_TYPES,
+} from "../constants/forms";
 import "./PayModal.css";
 
 export default function PayModal({ isOpen, onClose }) {
   const [don, setDon] = useState({
+    fullName: "",
     transactionDate: "",
     amount: "",
     transactionId: "",
+    block: "",
+    tower: "",
+    apartment: "",
+    contributionType: "",
   });
   const [donFile, setDonFile] = useState(null);
   const [donErrors, setDonErrors] = useState({});
   const [donLoading, setDonLoading] = useState(false);
   const [donSuccess, setDonSuccess] = useState(false);
+  const [donTowers, setDonTowers] = useState([]);
   const donFileRef = useRef(null);
 
   const handleClose = useCallback(() => {
-    setDon({ transactionDate: "", amount: "", transactionId: "" });
+    setDon({
+      fullName: "",
+      transactionDate: "",
+      amount: "",
+      transactionId: "",
+      block: "",
+      tower: "",
+      apartment: "",
+      contributionType: "",
+    });
     setDonFile(null);
     setDonErrors({});
     setDonSuccess(false);
+    setDonTowers([]);
     if (donFileRef.current) donFileRef.current.value = "";
     onClose();
   }, [onClose]);
@@ -40,9 +61,22 @@ export default function PayModal({ isOpen, onClose }) {
 
   async function handleDonSubmit(e) {
     e.preventDefault();
-    const { transactionDate, amount, transactionId } = don;
+    const {
+      transactionDate,
+      amount,
+      transactionId,
+      block,
+      tower,
+      fullName,
+      apartment,
+      contributionType,
+    } = don;
     const errs = {};
     const today = new Date().toISOString().slice(0, 10);
+
+    if (!fullName.trim()) errs.fullName = "Required";
+    else if (!/^[A-Za-z\s'-]+$/.test(fullName.trim()))
+      errs.fullName = "Letters, spaces, hyphens or apostrophes only";
 
     if (!transactionDate) errs.transactionDate = "Required";
     else if (transactionDate < "2026-04-01")
@@ -61,8 +95,6 @@ export default function PayModal({ isOpen, onClose }) {
         "Provide at least one: Transaction ID or a screenshot";
       errs.attachment = "Provide at least one: Transaction ID or a screenshot";
     } else {
-      if (hasId && !/^[A-Za-z0-9]+$/.test(transactionId.trim()))
-        errs.transactionId = "Letters and numbers only";
       if (hasFile) {
         const okType = ["image/png", "image/jpeg"].includes(donFile.type);
         const okExt = /\.(png|jpe?g)$/i.test(donFile.name);
@@ -104,19 +136,32 @@ export default function PayModal({ isOpen, onClose }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             formType: "donation",
+            fullName: fullName.trim(),
+            block: block || "NA",
+            tower: tower || "NA",
+            apartment: apartment || "NA",
+            contributionType: contributionType || "NA",
             transactionDate,
             amount,
-            ...(transactionId.trim()
-              ? { transactionId: transactionId.trim() }
-              : {}),
-            ...(attachment ? { attachment } : {}),
+            transactionId: transactionId.trim() || "NA",
+            ...(attachment ? { paymentAttachment: attachment } : {}),
             createdAt: new Date().toISOString(),
           }),
         },
       );
       if (!res.ok) throw new Error(`Server responded ${res.status}`);
       setDonSuccess(true);
-      setDon({ transactionDate: "", amount: "", transactionId: "" });
+      setDon({
+        fullName: "",
+        transactionDate: "",
+        amount: "",
+        transactionId: "",
+        block: "",
+        tower: "",
+        apartment: "",
+        contributionType: "",
+      });
+      setDonTowers([]);
       setDonFile(null);
       if (donFileRef.current) donFileRef.current.value = "";
     } catch (err) {
@@ -143,13 +188,16 @@ export default function PayModal({ isOpen, onClose }) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.8"
               aria-hidden="true"
             >
-              <rect x="2" y="5" width="20" height="14" rx="2" />
-              <path d="M2 10h20" />
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <path d="M9 7h6M9 11h6M9 15h4" />
             </svg>
-            <span>Scan to Pay / Donate</span>
+            <span className="pay-modal-title-text">
+              <strong>Pay &amp; Donate</strong>
+              <em>Scan QR · Use UPI</em>
+            </span>
           </div>
           <button
             className="pay-modal-close"
@@ -175,6 +223,34 @@ export default function PayModal({ isOpen, onClose }) {
           />
         </div>
 
+        <div className="pay-upi-row">
+          <span className="pay-upi-label">UPI ID</span>
+          <span className="pay-upi-id">
+            msutopiadurgotsavcommittee.eazypay@icici
+          </span>
+          <button
+            className="pay-upi-copy"
+            onClick={() =>
+              navigator.clipboard.writeText(
+                "msutopiadurgotsavcommittee.eazypay@icici",
+              )
+            }
+            title="Copy UPI ID"
+            aria-label="Copy UPI ID"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+          </button>
+        </div>
+
         <p className="pay-modal-hint">
           🙏 &nbsp; Scan the QR code with any UPI app to contribute to the
           festivities
@@ -182,7 +258,7 @@ export default function PayModal({ isOpen, onClose }) {
 
         {/* ── Donation details form ── */}
         <div className="don-divider">
-          <span>Donation Details (Not mandatory to submit)</span>
+          <span>Not mandatory to fill up</span>
         </div>
 
         {donSuccess ? (
@@ -202,7 +278,122 @@ export default function PayModal({ isOpen, onClose }) {
         ) : (
           <form className="don-form" onSubmit={handleDonSubmit} noValidate>
             <div className="don-row">
-              <label>Date of Transaction</label>
+              <label>Type of Contribution</label>
+              <select
+                value={don.contributionType}
+                onChange={(e) =>
+                  setDon((p) => ({ ...p, contributionType: e.target.value }))
+                }
+              >
+                <option value="">Please select (optional)</option>
+                {CONTRIBUTION_TYPES.map(({ label, price }) => (
+                  <option key={label} value={label}>
+                    {label}
+                    {price ? ` — ₹${price.toLocaleString("en-IN")}` : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="don-row">
+              <label>
+                Full Name <span className="don-req">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your full name"
+                value={don.fullName}
+                autoComplete="name"
+                onChange={(e) => {
+                  setDon((p) => ({ ...p, fullName: e.target.value }));
+                  setDonErrors((p) => {
+                    const n = { ...p };
+                    delete n.fullName;
+                    return n;
+                  });
+                }}
+              />
+              {donErrors.fullName && (
+                <span className="don-field-error">{donErrors.fullName}</span>
+              )}
+            </div>
+
+            <div className="don-row">
+              <label>Block</label>
+              <select
+                value={don.block}
+                onChange={(e) => {
+                  const b = e.target.value;
+                  setDon((p) => ({ ...p, block: b, tower: "" }));
+                  setDonTowers(getTowersForBlock(b));
+                  setDonErrors((p) => {
+                    const n = { ...p };
+                    delete n.block;
+                    delete n.tower;
+                    return n;
+                  });
+                }}
+              >
+                <option value="" disabled>
+                  Please select
+                </option>
+                {BLOCKS.map((b) => (
+                  <option key={b}>{b}</option>
+                ))}
+              </select>
+              {donErrors.block && (
+                <span className="don-field-error">{donErrors.block}</span>
+              )}
+            </div>
+
+            <div className="don-row">
+              <label>Tower</label>
+              <select
+                value={don.tower}
+                disabled={!donTowers.length}
+                onChange={(e) => {
+                  setDon((p) => ({
+                    ...p,
+                    tower: e.target.value,
+                    apartment: "",
+                  }));
+                  setDonErrors((p) => {
+                    const n = { ...p };
+                    delete n.tower;
+                    return n;
+                  });
+                }}
+              >
+                <option value="">
+                  {donTowers.length ? "Please select" : "Select block first"}
+                </option>
+                {donTowers.map((t) => (
+                  <option key={t}>{t}</option>
+                ))}
+              </select>
+              {donErrors.tower && (
+                <span className="don-field-error">{donErrors.tower}</span>
+              )}
+            </div>
+
+            <div className="don-row">
+              <label>Apartment Number</label>
+              <input
+                type="text"
+                placeholder={don.tower ? "e.g. 1204" : "Select tower first"}
+                value={don.apartment}
+                maxLength={4}
+                inputMode="numeric"
+                disabled={!don.tower}
+                onChange={(e) =>
+                  setDon((p) => ({ ...p, apartment: e.target.value }))
+                }
+              />
+            </div>
+
+            <div className="don-row">
+              <label>
+                Date of Transaction <span className="don-req">*</span>
+              </label>
               <input
                 type="date"
                 value={don.transactionDate}

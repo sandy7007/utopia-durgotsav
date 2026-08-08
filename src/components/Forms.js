@@ -171,6 +171,26 @@ export default function Forms() {
         const e = validateImageFile(imgFile);
         if (e) errs.imageProof = e;
       }
+      /* Payment: either transaction ID or screenshot */
+      const payTxn = get("paymentTransactionId");
+      const payFile = form.elements.paymentProof?.files?.[0];
+      const payDate = get("paymentDate");
+      const today = new Date().toISOString().slice(0, 10);
+      if (!payDate) errs.paymentDate = "Required";
+      else if (payDate < "2026-01-01")
+        errs.paymentDate = "Date cannot be before 01 Jan 2026";
+      else if (payDate > today)
+        errs.paymentDate = "Date cannot be in the future";
+      if (!payTxn && !payFile) {
+        errs.paymentTransactionId =
+          "Provide Transaction ID or upload a screenshot";
+        errs.paymentProof = "Provide Transaction ID or upload a screenshot";
+      } else {
+        if (payFile) {
+          const ep = validateImageFile(payFile);
+          if (ep) errs.paymentProof = ep;
+        }
+      }
     }
 
     if (activeTab === "cultural") {
@@ -241,11 +261,23 @@ export default function Forms() {
     setErrors({});
     setLoading(true);
     try {
-      const imgFile =
-        activeTab === "registration" || activeTab === "bhogCoupons"
-          ? form.elements.imageProof?.files?.[0]
-          : null;
-      const attachment = await buildAttachment(imgFile, activeTab);
+      let attachment = null;
+      let paymentAttachment = null;
+      if (activeTab === "registration") {
+        attachment = await buildAttachment(
+          form.elements.imageProof?.files?.[0],
+          activeTab,
+        );
+        paymentAttachment = await buildAttachment(
+          form.elements.paymentProof?.files?.[0],
+          `${activeTab}/payment`,
+        );
+      } else if (activeTab === "bhogCoupons") {
+        attachment = await buildAttachment(
+          form.elements.imageProof?.files?.[0],
+          activeTab,
+        );
+      }
 
       const payload = {
         formType: activeTab,
@@ -255,6 +287,7 @@ export default function Forms() {
         email,
         ...getTabPayload(fd),
         ...(attachment ? { attachment } : {}),
+        ...(paymentAttachment ? { paymentAttachment } : {}),
         createdAt: new Date().toISOString(),
       };
 
@@ -280,12 +313,17 @@ export default function Forms() {
   function getTabPayload(fd) {
     const get = (k) => String(fd.get(k) || "").trim();
     switch (activeTab) {
-      case "registration":
+      case "registration": {
+        const txn = get("paymentTransactionId");
+        const pDate = get("paymentDate");
         return {
           block: get("block"),
           tower: get("tower"),
           apartment: get("apartment"),
+          transactionDate: pDate || "NA",
+          transactionId: txn || "NA",
         };
+      }
       case "cultural":
         return {
           block: get("block"),
@@ -555,6 +593,98 @@ export default function Forms() {
                           PNG or JPG/JPEG · max 5 MB
                         </span>
                         <FieldError msg={errors.imageProof} />
+                      </div>
+
+                      {/* ── Payment section ── */}
+                      <div className="form-payment-section">
+                        <p className="form-payment-title">
+                          Membership Fee Payment
+                        </p>
+                        <p className="form-payment-note">
+                          Scan the QR to pay, then provide either your
+                          Transaction ID or a screenshot below.
+                        </p>
+                        <div className="form-qr-wrap">
+                          <img
+                            src="/images/scanner.jpeg"
+                            alt="Payment QR Code"
+                            className="form-qr-img"
+                          />
+                        </div>
+                        <div className="form-upi-row">
+                          <span className="form-upi-label">UPI ID</span>
+                          <span className="form-upi-id">msutopiadurgotsavcommittee.eazypay@icici</span>
+                          <button
+                            type="button"
+                            className="form-upi-copy"
+                            onClick={() => navigator.clipboard.writeText("msutopiadurgotsavcommittee.eazypay@icici")}
+                            title="Copy UPI ID"
+                            aria-label="Copy UPI ID"
+                          >
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                              <rect x="9" y="9" width="13" height="13" rx="2" />
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Transaction Date <span className="req">*</span>
+                        </label>
+                        <input
+                          type="date"
+                          name="paymentDate"
+                          max={new Date().toISOString().slice(0, 10)}
+                          min="2026-01-01"
+                          onChange={() => clearErr("paymentDate")}
+                        />
+                        <FieldError msg={errors.paymentDate} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Transaction ID{" "}
+                          <span className="form-either">
+                            (or screenshot below)
+                          </span>{" "}
+                          <span className="req">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="paymentTransactionId"
+                          placeholder="e.g. TXN123ABC"
+                          onChange={() => {
+                            clearErr("paymentTransactionId");
+                            clearErr("paymentProof");
+                          }}
+                        />
+                        <FieldError msg={errors.paymentTransactionId} />
+                      </div>
+
+                      <div className="form-row">
+                        <label>
+                          Payment Screenshot{" "}
+                          <span className="form-either">
+                            (or Transaction ID above)
+                          </span>{" "}
+                          <span className="req">*</span>
+                        </label>
+                        <input
+                          type="file"
+                          name="paymentProof"
+                          accept=".png,.jpg,.jpeg,image/png,image/jpeg"
+                          onChange={() => {
+                            clearErr("paymentProof");
+                            clearErr("paymentTransactionId");
+                          }}
+                          className="file-input"
+                        />
+                        <span className="form-help">
+                          PNG or JPG/JPEG · max 5 MB
+                        </span>
+                        <FieldError msg={errors.paymentProof} />
                       </div>
                     </>
                   )}

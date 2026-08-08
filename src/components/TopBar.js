@@ -33,12 +33,12 @@ export default function TopBar() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    fetch("https://api.counterapi.dev/v1/utopia-durgotsav/site-visits/hit")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => d && setVisitors(d.count ?? d.value ?? null))
-      .catch(() => {});
-  }, []);
+  //   useEffect(() => {
+  //     fetch("https://api.counterapi.dev/v1/utopia-durgotsav/site-visits/hit")
+  //       .then((r) => (r.ok ? r.json() : null))
+  //       .then((d) => d && setVisitors(d.count ?? d.value ?? null))
+  //       .catch(() => {});
+  //   }, []);
 
   if (dismissed || !time) return null;
 
@@ -129,15 +129,6 @@ export default function TopBar() {
           </>
         )} */}
       </div>
-
-      {/* Dismiss */}
-      <button
-        className="topbar-close"
-        onClick={() => setDismissed(true)}
-        aria-label="Dismiss banner"
-      >
-        ✕
-      </button>
     </div>
   );
 }

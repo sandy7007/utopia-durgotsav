@@ -61,21 +61,38 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+.pay-modal-title svg {
+  width: 22px;
+  height: 22px;
+  stroke: #f5d060;
+  flex-shrink: 0;
+}
+
+.pay-modal-title-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.pay-modal-title-text strong {
   font-family: "Cinzel", serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   background: linear-gradient(90deg, #f5d060, #c8960c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
 }
 
-.pay-modal-title svg {
-  width: 20px;
-  height: 20px;
-  stroke: #f5d060;
-  flex-shrink: 0;
-  -webkit-text-fill-color: initial;
+.pay-modal-title-text em {
+  font-style: normal;
+  font-size: 0.67rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
 }
 
 .pay-modal-close {
@@ -132,6 +149,55 @@
   line-height: 1.5;
 }
 
+.pay-upi-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  background: rgba(245, 208, 96, 0.08);
+  border: 1px solid rgba(245, 208, 96, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+}
+
+.pay-upi-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 208, 96, 0.7);
+  flex-shrink: 0;
+}
+
+.pay-upi-id {
+  flex: 1;
+  font-size: 0.78rem;
+  font-family: monospace;
+  color: #fff;
+  word-break: break-all;
+}
+
+.pay-upi-copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  color: rgba(245, 208, 96, 0.7);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.pay-upi-copy:hover {
+  color: #ffd700;
+}
+
+.pay-upi-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
 @keyframes noticeGlow {
   0%,
   100% {
@@ -175,9 +241,10 @@
   align-items: center;
   gap: 0.6rem;
   margin: 1.4rem 0 1rem;
-  color: rgba(245, 208, 96, 0.55);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  color: rgba(245, 208, 96, 0.85);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -186,7 +253,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(245, 208, 96, 0.2);
+  background: rgba(245, 208, 96, 0.35);
 }
 
 .don-form {
@@ -209,7 +276,8 @@
 }
 
 .don-row input[type="text"],
-.don-row input[type="date"] {
+.don-row input[type="date"],
+.don-row select {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(245, 208, 96, 0.25);
   border-radius: 8px;
@@ -223,8 +291,19 @@
 }
 
 .don-row input[type="text"]:focus,
-.don-row input[type="date"]:focus {
+.don-row input[type="date"]:focus,
+.don-row select:focus {
   border-color: rgba(245, 208, 96, 0.6);
+}
+
+.don-row select option {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.don-row select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .don-file-input {
@@ -258,6 +337,11 @@
   font-weight: 400;
   color: rgba(255, 215, 0, 0.55);
   font-style: italic;
+}
+
+.don-req {
+  color: #ff6b6b;
+  margin-left: 2px;
 }
 
 .don-field-error {

@@ -44,7 +44,7 @@ export const SOCIAL_LINKS = [
    Hero section. Point href at any navigation anchor.
    ───────────────────────────────────────────────────────────── */
 export const ANNOUNCEMENT_BUTTON = {
-  enabled: true, // ← flip to true to show
+  enabled: false, // ← flip to true to show
   label: "Bhog coupon available",
   href: "#forms", // ← target section anchor
 };

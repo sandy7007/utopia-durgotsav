@@ -19,6 +19,13 @@ export default function App() {
   const [payOpen, setPayOpen] = useState(false);
   const openPay = useCallback(() => setPayOpen(true), []);
   const closePay = useCallback(() => setPayOpen(false), []);
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   /* Scroll-reveal: add .visible to .reveal elements when they enter view */
   useEffect(() => {
@@ -51,6 +58,23 @@ export default function App() {
       <Forms />
       <Footer />
       <PayModal isOpen={payOpen} onClose={closePay} />
+      {showTop && (
+        <button
+          className="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            aria-hidden="true"
+          >
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }

@@ -255,6 +255,7 @@
 .forms-card input[type="email"],
 .forms-card input[type="tel"],
 .forms-card input[type="number"],
+.forms-card input[type="date"],
 .forms-card select {
   width: 100%;
   padding: 0.65rem 0.9rem;
@@ -269,6 +270,10 @@
     box-shadow 0.2s ease;
   appearance: none;
   -webkit-appearance: none;
+}
+
+.forms-card input[type="date"] {
+  color-scheme: dark;
 }
 
 .forms-card input::placeholder {
@@ -375,6 +380,110 @@
 .form-help {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.35);
+}
+
+.form-either {
+  font-size: 0.72rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 215, 0, 0.55);
+}
+
+/* ── Payment section with QR ── */
+.form-payment-section {
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 215, 0, 0.04);
+  padding: 1.1rem 1.2rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+.form-payment-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.form-payment-note {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+.form-qr-wrap {
+  margin-top: 0.4rem;
+  padding: 6px;
+  border-radius: 10px;
+  background: #fff;
+  display: inline-block;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.2);
+}
+.form-qr-img {
+  display: block;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.form-qr-img {
+  display: block;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.form-upi-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  background: rgba(245, 208, 96, 0.08);
+  border: 1px solid rgba(245, 208, 96, 0.25);
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+}
+
+.form-upi-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 208, 96, 0.7);
+  flex-shrink: 0;
+}
+
+.form-upi-id {
+  flex: 1;
+  font-size: 0.78rem;
+  font-family: monospace;
+  color: #fff;
+  word-break: break-all;
+}
+
+.form-upi-copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  color: rgba(245, 208, 96, 0.7);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.form-upi-copy:hover {
+  color: #ffd700;
+}
+
+.form-upi-copy svg {
+  width: 15px;
+  height: 15px;
 }
 
 /* ── Field errors ── */

@@ -17,11 +17,11 @@
 }
 
 .nav-inner {
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 /* ── Logo ── */
@@ -171,6 +171,10 @@
 
 /* ── Mobile ── */
 @media (max-width: 880px) {
+  .nav-inner {
+    justify-content: flex-start;
+  }
+
   .hamburger {
     display: flex;
   }

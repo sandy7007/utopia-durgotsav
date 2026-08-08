@@ -68,20 +68,6 @@ export default function Navbar({ onPayClick }) {
         className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}
       >
         <div className="nav-inner">
-          {/* Logo */}
-          <a
-            className="nav-logo"
-            href="#home"
-            onClick={() => handleClick("#home")}
-          >
-            <span className="nav-logo-text">
-              <span className="nav-logo-main">Utopia Durgotsav</span>
-              <span className="nav-logo-sub">
-                Presented by Utopia Durgotsav Committee
-              </span>
-            </span>
-          </a>
-
           {/* Desktop links */}
           <ul
             className={`nav-links${menuOpen ? " open" : ""}`}
