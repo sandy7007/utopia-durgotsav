@@ -30,8 +30,20 @@ export const DURGA_PUJA_IMAGES = [
   "/images/Durga_puja/1000163261.jpg",
   "/images/Durga_puja/1000163264.jpg",
   "/images/Durga_puja/1000163270.jpg",
-  "/images/mixedPics/image1.jpg",
-  "/images/mixedPics/image2.jpg",
+  "/images/Durga_puja/1000163225(1).jpg",
+  "/images/Durga_puja/PHOTO-2026-07-30-18-49-52.jpg",
+  "/images/Durga_puja/beyond-beats.jpeg",
+  "/images/Durga_puja/bhog.jpeg",
+  "/images/Durga_puja/cultural-1.jpeg",
+  "/images/Durga_puja/cultural-2.jpeg",
+  "/images/Durga_puja/kalipuja-ladies.jpeg",
+  "/images/Durga_puja/kids-drawing.jpeg",
+  "/images/Durga_puja/kids.jpeg",
+  "/images/Durga_puja/prize.jpeg",
+  "/images/Durga_puja/pushpanjali.jpeg",
+  "/images/Durga_puja/pushpanjali1.jpeg",
+  "/images/Durga_puja/sponsors-2026.jpeg",
+  "/images/Durga_puja/stalls.jpeg",
 ];
 
 /* ── Kali Puja carousel (5 images) ── */
