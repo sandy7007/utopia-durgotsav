@@ -123,6 +123,7 @@ export const GALLERY_IMAGES = [
   "/images/photos/IMG-20260521-WA0044.jpg",
   "/images/photos/IMG-20260521-WA0045.jpg",
   "/images/photos/IMG-20260521-WA0046.jpg",
+  "/images/mixedPics/dandiya.jpg",
   /* Mixed event photos */
   "/images/mixedPics/image3.webp",
   "/images/mixedPics/image4.jfif",
