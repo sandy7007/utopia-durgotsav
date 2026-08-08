@@ -1,12 +1,12 @@
 import React from "react";
 import "./Footer.css";
 import { QUICK_LINKS } from "../constants/navigation";
-import { CONTACT_ITEMS } from "../constants/festival";
+import { CONTACT_ITEMS, VENUE, VENUE_ADDRESS } from "../constants/festival";
 
 const SOCIALS = [
   {
     name: "Instagram",
-    href: "https://www.instagram.com/uma_at_utopiayou",
+    href: "https://www.instagram.com/uma_at_utopia",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -27,7 +27,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className="footer" id="contact">
       <div className="footer-glow" />
 
       <div className="container">
@@ -92,6 +92,19 @@ export default function Footer() {
                   </div>
                 </div>
               ))}
+
+              {/* Locate Us */}
+              <a
+                className="footer-locate-btn"
+                href={`https://maps.google.com/?q=${encodeURIComponent(VENUE + ", " + VENUE_ADDRESS)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+                Locate Us on Google Maps
+              </a>
             </div>
           </div>
         </div>
@@ -103,6 +116,9 @@ export default function Footer() {
         <div className="footer-bottom">
           <p className="footer-copy">
             © {year} Utopia Durgotsav Committee. All rights reserved.
+          </p>
+          <p className="footer-reg">
+            Reg. No. 232/24-25 &nbsp;·&nbsp; File No. 1478/2025-26
           </p>
         </div>
       </div>

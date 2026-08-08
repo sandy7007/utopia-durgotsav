@@ -172,7 +172,7 @@ export default function PayModal({ isOpen, onClose }) {
 
         {/* ── Donation details form ── */}
         <div className="don-divider">
-          <span>Submit Donation Details (Not mandatory)</span>
+          <span>Donation Details (Not mandatory to submit)</span>
         </div>
 
         {donSuccess ? (

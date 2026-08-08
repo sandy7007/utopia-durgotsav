@@ -14,6 +14,7 @@ export const NAV_LINKS = [
   { href: "#sponsors", label: "Sponsors" },
   { href: "#schedule", label: "Schedule" },
   { href: "#forms", label: "Forms" },
+  { href: "#contact", label: "Contact" },
 ];
 
 /** Quick links column in the Footer */
@@ -26,6 +27,7 @@ export const QUICK_LINKS = [
   { href: "#gallery", label: "Gallery" },
   { href: "#schedule", label: "Schedule" },
   { href: "#forms", label: "Forms" },
+  { href: "#contact", label: "Contact" },
 ];
 
 /** Social media links (icons rendered by Footer) */

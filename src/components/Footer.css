@@ -168,6 +168,35 @@
   color: var(--text-light);
 }
 
+.footer-locate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  background: rgba(245, 208, 96, 0.1);
+  border: 1px solid rgba(245, 208, 96, 0.3);
+  border-radius: 8px;
+  color: #f5d060;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.footer-locate-btn:hover {
+  background: rgba(245, 208, 96, 0.2);
+  border-color: rgba(245, 208, 96, 0.55);
+}
+
+.footer-locate-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /* Newsletter */
 .newsletter-label {
   font-size: 0.75rem;
@@ -246,6 +275,15 @@
 .footer-made {
   font-size: 0.78rem;
   color: var(--text-muted);
+}
+
+.footer-reg {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.03em;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.15rem;
 }
 
 /* ── Responsive ── */
