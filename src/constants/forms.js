@@ -8,7 +8,7 @@ export const TABS = [
   { key: "registration", label: "Member Registration", disabled: false },
   { key: "cultural", label: "Cultural" },
   { key: "pujaRituals", label: "Puja Rituals", disabled: false },
-  { key: "bhogCoupons", label: "Bhog Coupons", disabled: false },
+  //   { key: "bhogCoupons", label: "Bhog Coupons", disabled: false },
   //   { key: "events", label: "Events", disabled: true },
 ];
 

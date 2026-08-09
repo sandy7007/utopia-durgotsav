@@ -287,7 +287,7 @@ export default function PayModal({ isOpen, onClose }) {
           </div>
         ) : (
           <form className="don-form" onSubmit={handleDonSubmit} noValidate>
-            <div className="don-row">
+            {/* <div className="don-row">
               <label>Type of Contribution</label>
               <select
                 value={don.donationType}
@@ -304,7 +304,7 @@ export default function PayModal({ isOpen, onClose }) {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div className="don-row">
               <label>
                 Full Name <span className="don-req">*</span>

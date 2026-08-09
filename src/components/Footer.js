@@ -51,9 +51,8 @@ export default function Footer() {
             {/* Socials */}
             <div className="footer-socials">
               {SOCIALS.map(({ name, href, icon }) => (
-                <>
+                <React.Fragment key={name}>
                   <a
-                    key={name}
                     href={href}
                     className="social-btn"
                     aria-label={name}
@@ -62,7 +61,7 @@ export default function Footer() {
                     {icon}
                   </a>
                   <span>Follow us on Instagram</span>
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>

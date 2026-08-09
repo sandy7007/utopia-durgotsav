@@ -62,16 +62,15 @@ export const SCHEDULE = [
     days: [
       {
         day: "Sashti",
-        date: "Oct 16, 2026 (Friday)",
+        date: "Oct 16 - 2026 (Friday)",
         events: [
-          "Bodhon & inauguration of Cultural Programme (Tridhara)",
-          "Morning aarti",
-          "Cultural programme \u2013 classical inaugural evening - 6:30 PM to 9:30 PM",
+          "Bodhon , Amontron & Adhibas",
+          "Cultural programme \u2013 classical inaugural evening of Tridhara - 6:30 PM to 9:30 PM",
         ],
       },
       {
-        day: "Saptami - Day1",
-        date: "Oct 17, 2026 (Saturday)",
+        day: "Saptami",
+        date: "Oct 17,18 - 2026 (Saturday, Sunday)",
         events: [
           "Morning Games & competitions for children/seniors",
           "Morning Puja",
@@ -79,17 +78,8 @@ export const SCHEDULE = [
         ],
       },
       {
-        day: "Saptami - Day2",
-        date: "Oct 18, 2026 (Sunday)",
-        events: [
-          "Morning Games & competitions for children/seniors",
-          "Morning Puja",
-          "Cultural programme \u2013 A Celebration of Cinema - 6:30 PM to 9:30 PM",
-        ],
-      },
-      {
         day: "Ashtami",
-        date: "Oct 19, 2026 (Monday)",
+        date: "Oct 19 - 2026 (Monday)",
         events: [
           "Grand pushpanjali (flower offering) in the morning",
           "Sandhi Puja at dusk (the most sacred hour)",
@@ -100,7 +90,7 @@ export const SCHEDULE = [
       },
       {
         day: "Navami",
-        date: "Oct 20, 2026 (Tuesday)",
+        date: "Oct 20 - 2026 (Tuesday)",
         events: [
           "Special aarti and bhog offering",
           "Most awaited Dandiya Dance & Bollywood Night",
@@ -108,7 +98,7 @@ export const SCHEDULE = [
       },
       {
         day: "Dashami",
-        date: "Oct 21, 2026 (Wednesday)",
+        date: "Oct 21 - 2026 (Wednesday)",
         events: [
           "Sindoor Khela (vermilion ceremony)",
           "Bisarjan procession with dhak beats",

@@ -525,7 +525,6 @@ export default function Forms() {
                             setBlock(e.target.value);
                             clearErr("block");
                           }}
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Please select
@@ -710,7 +709,6 @@ export default function Forms() {
                             setBlock(e.target.value);
                             clearErr("block");
                           }}
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Please select
@@ -835,7 +833,6 @@ export default function Forms() {
                             setBlock(e.target.value);
                             clearErr("block");
                           }}
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Please select
@@ -909,7 +906,6 @@ export default function Forms() {
                             setSelectedPuja(e.target.value);
                             clearErr("puja");
                           }}
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Please select
@@ -978,7 +974,6 @@ export default function Forms() {
                             setBlock(e.target.value);
                             clearErr("block");
                           }}
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Please select
