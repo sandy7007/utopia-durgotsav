@@ -73,7 +73,7 @@ export const SCHEDULE = [
         date: "Oct 17,18 - 2026 (Saturday, Sunday)",
         events: [
           "Morning Games & competitions for children/seniors",
-          "Morning Puja",
+          "Morning Puja & Nabapatrika",
           "Cultural programme \u2013 Celebrating Generations & Folk Traditions - 6:30 PM to 9:30 PM",
         ],
       },

@@ -210,6 +210,7 @@ export default function PayModal({ isOpen, onClose }) {
             </span>
           </div>
           <button
+            type="button"
             className="pay-modal-close"
             onClick={handleClose}
             aria-label="Close"
@@ -239,6 +240,7 @@ export default function PayModal({ isOpen, onClose }) {
             msutopiadurgotsavcommittee.eazypay@icici
           </span>
           <button
+            type="button"
             className="pay-upi-copy"
             onClick={() =>
               navigator.clipboard.writeText(

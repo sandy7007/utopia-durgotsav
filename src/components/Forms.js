@@ -76,7 +76,12 @@ function SuccessModal({ onClose }) {
         </div>
         <h3>Submitted Successfully!</h3>
         <p>Your form has been received. Thank you for participating!</p>
-        <button className="forms-success-btn" onClick={onClose} autoFocus>
+        <button
+          type="button"
+          className="forms-success-btn"
+          onClick={onClose}
+          autoFocus
+        >
           OK
         </button>
       </motion.div>
@@ -387,6 +392,7 @@ export default function Forms() {
           {TABS.map((tab) => (
             <button
               key={tab.key}
+              type="button"
               role="tab"
               aria-selected={activeTab === tab.key}
               aria-disabled={tab.disabled}
@@ -450,7 +456,7 @@ export default function Forms() {
                 <form ref={formRef} onSubmit={handleSubmit} noValidate>
                   {/* ── Common fields ── */}
                   <div className="form-row">
-                    <label>
+                    <label htmlFor="fullName">
                       Name <span className="req">*</span>
                     </label>
                     <div className="name-group">
@@ -469,6 +475,7 @@ export default function Forms() {
                       </select>
                       <input
                         type="text"
+                        id="fullName"
                         name="fullName"
                         placeholder="Full name"
                         autoComplete="name"
@@ -479,13 +486,14 @@ export default function Forms() {
                   </div>
 
                   <div className="form-row">
-                    <label>
+                    <label htmlFor="mobile">
                       Mobile <span className="req">*</span>
                     </label>
                     <div className="mobile-group">
                       <span className="isd">+91</span>
                       <input
                         type="tel"
+                        id="mobile"
                         name="mobile"
                         placeholder="9876543210"
                         maxLength={10}
@@ -498,11 +506,12 @@ export default function Forms() {
                   </div>
 
                   <div className="form-row">
-                    <label>
+                    <label htmlFor="email">
                       Email <span className="req">*</span>
                     </label>
                     <input
                       type="email"
+                      id="email"
                       name="email"
                       placeholder="name@example.com"
                       autoComplete="email"
@@ -515,10 +524,11 @@ export default function Forms() {
                   {activeTab === "registration" && (
                     <>
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="reg-block">
                           Block <span className="req">*</span>
                         </label>
                         <select
+                          id="reg-block"
                           name="block"
                           value={block}
                           onChange={(e) => {
@@ -537,10 +547,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="reg-tower">
                           Tower <span className="req">*</span>
                         </label>
                         <select
+                          id="reg-tower"
                           name="tower"
                           disabled={!towers.length}
                           onChange={() => clearErr("tower")}
@@ -559,10 +570,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="reg-apartment">
                           Apartment Number <span className="req">*</span>
                         </label>
                         <input
+                          id="reg-apartment"
                           type="text"
                           name="apartment"
                           placeholder="e.g. 1204"
@@ -574,11 +586,12 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="imageProof">
                           Resident Proof Image (belong/mygate){" "}
                           <span className="req">*</span>
                         </label>
                         <input
+                          id="imageProof"
                           type="file"
                           name="imageProof"
                           accept=".png,.jpg,.jpeg,image/png,image/jpeg"
@@ -638,10 +651,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="paymentDate">
                           Transaction Date <span className="req">*</span>
                         </label>
                         <input
+                          id="paymentDate"
                           type="date"
                           name="paymentDate"
                           max={new Date().toISOString().slice(0, 10)}
@@ -652,7 +666,7 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="paymentTransactionId">
                           Transaction ID{" "}
                           <span className="form-either">
                             (or screenshot below)
@@ -660,6 +674,7 @@ export default function Forms() {
                           <span className="req">*</span>
                         </label>
                         <input
+                          id="paymentTransactionId"
                           type="text"
                           name="paymentTransactionId"
                           placeholder="e.g. TXN123ABC"
@@ -672,7 +687,7 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="paymentProof">
                           Payment Screenshot{" "}
                           <span className="form-either">
                             (or Transaction ID above)
@@ -680,6 +695,7 @@ export default function Forms() {
                           <span className="req">*</span>
                         </label>
                         <input
+                          id="paymentProof"
                           type="file"
                           name="paymentProof"
                           accept=".png,.jpg,.jpeg,image/png,image/jpeg"
@@ -701,8 +717,9 @@ export default function Forms() {
                   {activeTab === "pujaRituals" && (
                     <>
                       <div className="form-row">
-                        <label>Block</label>
+                        <label htmlFor="pr-block">Block</label>
                         <select
+                          id="pr-block"
                           name="block"
                           value={block}
                           onChange={(e) => {
@@ -721,8 +738,9 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>Tower</label>
+                        <label htmlFor="pr-tower">Tower</label>
                         <select
+                          id="pr-tower"
                           name="tower"
                           disabled={!towers.length}
                           onChange={() => clearErr("tower")}
@@ -741,8 +759,9 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>Apartment Number</label>
+                        <label htmlFor="pr-apartment">Apartment Number</label>
                         <input
+                          id="pr-apartment"
                           type="text"
                           name="apartment"
                           placeholder="e.g. 1204"
@@ -754,10 +773,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="ritualType">
                           Ritual Type <span className="req">*</span>
                         </label>
                         <select
+                          id="ritualType"
                           name="ritualType"
                           onChange={() => clearErr("ritualType")}
                           defaultValue=""
@@ -778,10 +798,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="preferredDay">
                           Preferred Day <span className="req">*</span>
                         </label>
                         <select
+                          id="preferredDay"
                           name="preferredDay"
                           onChange={() => clearErr("preferredDay")}
                           defaultValue=""
@@ -799,10 +820,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="timeOfDay">
                           Time of Day <span className="req">*</span>
                         </label>
                         <select
+                          id="timeOfDay"
                           name="timeOfDay"
                           onChange={() => clearErr("timeOfDay")}
                           defaultValue=""
@@ -823,10 +845,11 @@ export default function Forms() {
                   {activeTab === "bhogCoupons" && (
                     <>
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="bhog-block">
                           Block <span className="req">*</span>
                         </label>
                         <select
+                          id="bhog-block"
                           name="block"
                           value={block}
                           onChange={(e) => {
@@ -845,10 +868,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="bhog-tower">
                           Tower <span className="req">*</span>
                         </label>
                         <select
+                          id="bhog-tower"
                           name="tower"
                           disabled={!towers.length}
                           onChange={() => clearErr("tower")}
@@ -867,10 +891,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="bhog-apartment">
                           Apartment Number <span className="req">*</span>
                         </label>
                         <input
+                          id="bhog-apartment"
                           type="text"
                           name="apartment"
                           placeholder="e.g. 1204"
@@ -882,10 +907,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="couponCount">
                           Coupon Quantity <span className="req">*</span>
                         </label>
                         <input
+                          id="couponCount"
                           type="number"
                           name="couponCount"
                           min={1}
@@ -896,10 +922,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="puja">
                           Puja <span className="req">*</span>
                         </label>
                         <select
+                          id="puja"
                           name="puja"
                           value={selectedPuja}
                           onChange={(e) => {
@@ -921,11 +948,12 @@ export default function Forms() {
 
                       {selectedPuja === "Durga Puja" && (
                         <div className="form-row">
-                          <label>
+                          <label htmlFor="pickupDay">
                             Pickup Day (Will be available from committee stalls)
                             <span className="req">*</span>
                           </label>
                           <select
+                            id="pickupDay"
                             name="pickupDay"
                             onChange={() => clearErr("pickupDay")}
                             defaultValue=""
@@ -942,10 +970,11 @@ export default function Forms() {
                       )}
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="bhog-imageProof">
                           Payment Screenshot <span className="req">*</span>
                         </label>
                         <input
+                          id="bhog-imageProof"
                           type="file"
                           name="imageProof"
                           accept=".png,.jpg,.jpeg,image/png,image/jpeg"
@@ -964,10 +993,11 @@ export default function Forms() {
                   {activeTab === "events" && (
                     <>
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="ev-block">
                           Block <span className="req">*</span>
                         </label>
                         <select
+                          id="ev-block"
                           name="block"
                           value={block}
                           onChange={(e) => {
@@ -986,10 +1016,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="ev-tower">
                           Tower <span className="req">*</span>
                         </label>
                         <select
+                          id="ev-tower"
                           name="tower"
                           disabled={!towers.length}
                           onChange={() => clearErr("tower")}
@@ -1008,10 +1039,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="ev-apartment">
                           Apartment Number <span className="req">*</span>
                         </label>
                         <input
+                          id="ev-apartment"
                           type="text"
                           name="apartment"
                           placeholder="e.g. 1204"
@@ -1023,10 +1055,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="eventType">
                           Event Type <span className="req">*</span>
                         </label>
                         <select
+                          id="eventType"
                           name="eventType"
                           onChange={() => clearErr("eventType")}
                           defaultValue=""
@@ -1047,10 +1080,11 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
+                        <label htmlFor="seatCount">
                           Seat Count <span className="req">*</span>
                         </label>
                         <input
+                          id="seatCount"
                           type="number"
                           name="seatCount"
                           min={1}
