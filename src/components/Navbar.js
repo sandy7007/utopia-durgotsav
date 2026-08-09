@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { NAV_LINKS } from "../constants/navigation";
 
@@ -6,6 +6,7 @@ export default function Navbar({ onPayClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const navRef = useRef(null);
 
   const openPay = () => {
     setMenuOpen(false);
@@ -49,11 +50,41 @@ export default function Navbar({ onPayClick }) {
     return () => observer.disconnect();
   }, []);
 
-  /* lock body scroll when mobile menu is open */
+  /* close menu on outside click/tap */
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (!menuOpen) return;
+    const handler = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler, { passive: true });
     return () => {
-      document.body.style.overflow = "";
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [menuOpen]);
+
+  /* lock body scroll when mobile menu is open (iOS-safe) */
+  useEffect(() => {
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    }
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
     };
   }, [menuOpen]);
 
@@ -65,6 +96,7 @@ export default function Navbar({ onPayClick }) {
   return (
     <>
       <nav
+        ref={navRef}
         className={`navbar${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}
       >
         <div className="nav-inner">
