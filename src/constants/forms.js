@@ -1,6 +1,6 @@
 /* ─── Forms API ───────────────────────────────────────────────── */
 export const FORM_API_ENDPOINT =
-  "https://unrenh5oj3.execute-api.eu-north-1.amazonaws.com/prod/submit";
+  "https://yrnuwylgwj.execute-api.eu-north-1.amazonaws.com/prod/submit";
 
 /* ─── Tabs ────────────────────────────────────────────────────── */
 // change the disabled to false or remove the disabled property to enable a form tab

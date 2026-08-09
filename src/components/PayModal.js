@@ -130,7 +130,7 @@ export default function PayModal({ isOpen, onClose }) {
         };
       }
       const res = await fetch(
-        "https://unrenh5oj3.execute-api.eu-north-1.amazonaws.com/prod/submit",
+        "https://yrnuwylgwj.execute-api.eu-north-1.amazonaws.com/prod/submit",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
