@@ -70,7 +70,7 @@ export const SCHEDULE = [
         ],
       },
       {
-        day: "Saptami",
+        day: "Saptami - Day1",
         date: "Oct 17, 2026 (Saturday)",
         events: [
           "Morning Games & competitions for children/seniors",
@@ -79,7 +79,7 @@ export const SCHEDULE = [
         ],
       },
       {
-        day: "Saptami",
+        day: "Saptami - Day2",
         date: "Oct 18, 2026 (Sunday)",
         events: [
           "Morning Games & competitions for children/seniors",
@@ -100,7 +100,7 @@ export const SCHEDULE = [
       },
       {
         day: "Navami",
-        date: "Oct 19, 2026 (Tuesday)",
+        date: "Oct 20, 2026 (Tuesday)",
         events: [
           "Special aarti and bhog offering",
           "Most awaited Dandiya Dance & Bollywood Night",
@@ -108,7 +108,7 @@ export const SCHEDULE = [
       },
       {
         day: "Dashami",
-        date: "Oct 20, 2026 (Wednesday)",
+        date: "Oct 21, 2026 (Wednesday)",
         events: [
           "Sindoor Khela (vermilion ceremony)",
           "Bisarjan procession with dhak beats",

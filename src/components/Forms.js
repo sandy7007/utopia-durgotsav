@@ -207,12 +207,9 @@ export default function Forms() {
     }
 
     if (activeTab === "pujaRituals") {
-      if (!get("block")) errs.block = "Required";
-      if (!get("tower")) errs.tower = "Required";
       const aptP = get("apartment");
       const first2P = Number(aptP.length >= 2 ? aptP.slice(0, 2) : aptP);
-      if (!aptP) errs.apartment = "Required";
-      else if (!APT_RE.test(aptP) || Number(aptP) < 1 || first2P > 26)
+      if (aptP && (!APT_RE.test(aptP) || Number(aptP) < 1 || first2P > 26))
         errs.apartment = "Invalid (4 digits, first 2 ≤ 26)";
       if (!get("ritualType")) errs.ritualType = "Required";
       if (!get("preferredDay")) errs.preferredDay = "Required";
@@ -613,15 +610,27 @@ export default function Forms() {
                         </div>
                         <div className="form-upi-row">
                           <span className="form-upi-label">UPI ID</span>
-                          <span className="form-upi-id">msutopiadurgotsavcommittee.eazypay@icici</span>
+                          <span className="form-upi-id">
+                            msutopiadurgotsavcommittee.eazypay@icici
+                          </span>
                           <button
                             type="button"
                             className="form-upi-copy"
-                            onClick={() => navigator.clipboard.writeText("msutopiadurgotsavcommittee.eazypay@icici")}
+                            onClick={() =>
+                              navigator.clipboard.writeText(
+                                "msutopiadurgotsavcommittee.eazypay@icici",
+                              )
+                            }
                             title="Copy UPI ID"
                             aria-label="Copy UPI ID"
                           >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              aria-hidden="true"
+                            >
                               <rect x="9" y="9" width="13" height="13" rx="2" />
                               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                             </svg>
@@ -693,9 +702,7 @@ export default function Forms() {
                   {activeTab === "pujaRituals" && (
                     <>
                       <div className="form-row">
-                        <label>
-                          Block <span className="req">*</span>
-                        </label>
+                        <label>Block</label>
                         <select
                           name="block"
                           value={block}
@@ -716,9 +723,7 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
-                          Tower <span className="req">*</span>
-                        </label>
+                        <label>Tower</label>
                         <select
                           name="tower"
                           disabled={!towers.length}
@@ -738,9 +743,7 @@ export default function Forms() {
                       </div>
 
                       <div className="form-row">
-                        <label>
-                          Apartment Number <span className="req">*</span>
-                        </label>
+                        <label>Apartment Number</label>
                         <input
                           type="text"
                           name="apartment"

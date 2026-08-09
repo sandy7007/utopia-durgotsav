@@ -277,6 +277,7 @@
 
 .don-row input[type="text"],
 .don-row input[type="date"],
+.don-row input[type="email"],
 .don-row select {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(245, 208, 96, 0.25);
@@ -292,6 +293,7 @@
 
 .don-row input[type="text"]:focus,
 .don-row input[type="date"]:focus,
+.don-row input[type="email"]:focus,
 .don-row select:focus {
   border-color: rgba(245, 208, 96, 0.6);
 }
@@ -304,6 +306,42 @@
 .don-row select:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.don-phone-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 208, 96, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.don-isd {
+  padding: 0.5rem 0.65rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(245, 208, 96, 0.2);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.don-phone-group input {
+  flex: 1;
+  background: transparent;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+.don-phone-group:focus-within {
+  border-color: rgba(245, 208, 96, 0.6);
+  box-shadow: 0 0 0 3px rgba(245, 208, 96, 0.08);
 }
 
 .don-file-input {

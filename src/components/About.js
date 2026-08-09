@@ -53,8 +53,8 @@ export default function About({ aboutImage }) {
             <span className="ornament-symbol">✦</span>
           </div>
           <p className="section-subtitle">
-            A true devotion, culture, and community woven together in
-            celebration of the Divine Mother.
+            True devotion, culture and community, woven together in celebration
+            of the Divine Mother.
           </p>
         </motion.div>
 

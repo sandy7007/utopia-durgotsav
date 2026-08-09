@@ -29,15 +29,15 @@ export function getTowersForBlock(block) {
 
 /* ─── Contribution types (Pay / Donate modal) ─────────────────── */
 export const CONTRIBUTION_TYPES = [
-  //   { label: "Saree", price: 1500 },
-  //   { label: "Ashtami Sondhi Puja", price: 2100 },
-  //   { label: "Sindoor Khela", price: 501 },
-  //   { label: "Dhunuchi Naach", price: 501 },
-  //   { label: "Pushpanjali", price: 251 },
-  //   { label: "Bhog Sponsorship", price: 5100 },
-  //   { label: "Pandal Decoration", price: 2100 },
-  //   { label: "Cultural Programme Sponsor", price: 3100 },
-  //   { label: "General Donation", price: null },
+  { label: "Saree", price: 1500 },
+  { label: "Ashtami Sondhi Puja", price: 2100 },
+  { label: "Sindoor Khela", price: 501 },
+  { label: "Dhunuchi Naach", price: 501 },
+  { label: "Pushpanjali", price: 251 },
+  { label: "Bhog Sponsorship", price: 5100 },
+  { label: "Pandal Decoration", price: 2100 },
+  { label: "Cultural Programme Sponsor", price: 3100 },
+  { label: "General Donation", price: null },
 ];
 
 /* ─── Validation regexes ──────────────────────────────────────── */

@@ -9,13 +9,15 @@ import "./PayModal.css";
 export default function PayModal({ isOpen, onClose }) {
   const [don, setDon] = useState({
     fullName: "",
+    phone: "",
+    email: "",
     transactionDate: "",
     amount: "",
     transactionId: "",
     block: "",
     tower: "",
     apartment: "",
-    contributionType: "",
+    donationType: "",
   });
   const [donFile, setDonFile] = useState(null);
   const [donErrors, setDonErrors] = useState({});
@@ -27,13 +29,15 @@ export default function PayModal({ isOpen, onClose }) {
   const handleClose = useCallback(() => {
     setDon({
       fullName: "",
+      phone: "",
+      email: "",
       transactionDate: "",
       amount: "",
       transactionId: "",
       block: "",
       tower: "",
       apartment: "",
-      contributionType: "",
+      donationType: "",
     });
     setDonFile(null);
     setDonErrors({});
@@ -69,7 +73,9 @@ export default function PayModal({ isOpen, onClose }) {
       tower,
       fullName,
       apartment,
-      contributionType,
+      donationType,
+      phone,
+      email,
     } = don;
     const errs = {};
     const today = new Date().toISOString().slice(0, 10);
@@ -137,10 +143,12 @@ export default function PayModal({ isOpen, onClose }) {
           body: JSON.stringify({
             formType: "donation",
             fullName: fullName.trim(),
+            mobile: phone.trim() ? `+91${phone.trim()}` : "NA",
+            email: email.trim() || "NA",
             block: block || "NA",
             tower: tower || "NA",
             apartment: apartment || "NA",
-            contributionType: contributionType || "NA",
+            donationType: donationType || "NA",
             transactionDate,
             amount,
             transactionId: transactionId.trim() || "NA",
@@ -153,13 +161,15 @@ export default function PayModal({ isOpen, onClose }) {
       setDonSuccess(true);
       setDon({
         fullName: "",
+        phone: "",
+        email: "",
         transactionDate: "",
         amount: "",
         transactionId: "",
         block: "",
         tower: "",
         apartment: "",
-        contributionType: "",
+        donationType: "",
       });
       setDonTowers([]);
       setDonFile(null);
@@ -280,10 +290,10 @@ export default function PayModal({ isOpen, onClose }) {
             <div className="don-row">
               <label>Type of Contribution</label>
               <select
-                value={don.contributionType}
+                value={don.donationType}
                 disabled={!CONTRIBUTION_TYPES.length}
                 onChange={(e) =>
-                  setDon((p) => ({ ...p, contributionType: e.target.value }))
+                  setDon((p) => ({ ...p, donationType: e.target.value }))
                 }
               >
                 <option value="">Please select (optional)</option>
@@ -316,6 +326,37 @@ export default function PayModal({ isOpen, onClose }) {
               {donErrors.fullName && (
                 <span className="don-field-error">{donErrors.fullName}</span>
               )}
+            </div>
+
+            <div className="don-row">
+              <label>Phone Number</label>
+              <div className="don-phone-group">
+                <span className="don-isd">+91</span>
+                <input
+                  type="tel"
+                  placeholder="9876543210"
+                  value={don.phone}
+                  maxLength={10}
+                  inputMode="numeric"
+                  autoComplete="tel-national"
+                  onChange={(e) =>
+                    setDon((p) => ({ ...p, phone: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="don-row">
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="name@example.com"
+                value={don.email}
+                autoComplete="email"
+                onChange={(e) =>
+                  setDon((p) => ({ ...p, email: e.target.value }))
+                }
+              />
             </div>
 
             <div className="don-row">
