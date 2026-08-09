@@ -47,9 +47,9 @@ function PujaTimeline({ puja, bengali, color, days }) {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7 }}
       >
-        <span className="puja-bengali-sm" style={{ color }}>
+        {/* <span className="puja-bengali-sm" style={{ color }}>
           {bengali}
-        </span>
+        </span> */}
         <h3 className="puja-timeline-title" style={{ color }}>
           {puja}
         </h3>

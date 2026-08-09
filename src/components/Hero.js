@@ -87,7 +87,7 @@ export default function Hero({ heroBgImage, onPayClick }) {
           ✦ Welcome to ✦
         </motion.p>
 
-        <motion.h1
+        {/* <motion.h1
           className="hero-bengali"
           custom={1}
           variants={titleVariants}
@@ -95,21 +95,22 @@ export default function Hero({ heroBgImage, onPayClick }) {
           animate="visible"
         >
           দুর্গোৎসব
-        </motion.h1>
+        </motion.h1> */}
 
-        <motion.h2
+        <motion.h1
           className="hero-english"
-          custom={2}
+          custom={1}
           variants={titleVariants}
           initial="hidden"
           animate="visible"
         >
-          UTOPIA <br />D U R G O T S A V
-        </motion.h2>
+          UTOPIA <br />
+          DURGOTSAV
+        </motion.h1>
 
         <motion.div
           className="hero-divider"
-          custom={3}
+          custom={2}
           variants={titleVariants}
           initial="hidden"
           animate="visible"
@@ -121,7 +122,7 @@ export default function Hero({ heroBgImage, onPayClick }) {
 
         <motion.p
           className="hero-committee"
-          custom={4}
+          custom={3}
           variants={titleVariants}
           initial="hidden"
           animate="visible"
@@ -131,7 +132,7 @@ export default function Hero({ heroBgImage, onPayClick }) {
 
         <motion.p
           className="hero-since"
-          custom={5}
+          custom={4}
           variants={titleVariants}
           initial="hidden"
           animate="visible"
@@ -141,7 +142,7 @@ export default function Hero({ heroBgImage, onPayClick }) {
 
         <motion.div
           className="hero-actions"
-          custom={6}
+          custom={5}
           variants={titleVariants}
           initial="hidden"
           animate="visible"

@@ -278,13 +278,16 @@
 }
 
 .hero-english {
-  font-family: "Cinzel", serif;
-  font-size: clamp(1.1rem, 3.5vw, 2rem);
-  font-weight: 400;
-  letter-spacing: clamp(6px, 2vw, 14px);
-  color: var(--secondary);
-  margin-bottom: 1.4rem;
-  opacity: 0.85;
+  font-family: "Noto Serif Bengali", serif;
+  font-size: clamp(3.2rem, 5vw, 7.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  background: var(--gradient-fire);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 35px rgba(255, 107, 53, 0.4));
+  margin-bottom: 0.3rem;
 }
 
 /* Divider */
@@ -316,7 +319,7 @@
 }
 
 .hd-logo {
-  height: 60px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   padding: 4px;
@@ -669,8 +672,8 @@
   .diya-col {
     display: none;
   }
-  .hero-bengali {
-    font-size: clamp(3rem, 16vw, 5rem);
+  .hero-english {
+    font-size: clamp(3rem, 5vw, 5rem);
   }
   .lotus-strip {
     gap: 0.7rem;

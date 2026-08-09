@@ -7,6 +7,17 @@ export const LOGO_IMAGE = "/logo.png";
 export const HERO_BG_IMAGE = "/images/Durga_puja/1000163146.jpg";
 export const ABOUT_IMAGE = "/images/linearGradient/about_us.png";
 
+/* ── Dandiya Night carousel ── */
+export const DANDIYA_IMAGES = [
+  "/images/Dandiya/dandiya.jpg",
+  "/images/Durga_puja/1000163252.jpg",
+  "/images/Durga_puja/1000163264.jpg",
+  "/images/Dandiya/dandiya-2.jpg",
+  "/images/Dandiya/dandiya-3.jpg",
+  "/images/Dandiya/dandiya-4.jpg",
+  "/images/Dandiya/dandiya-5.jpg",
+];
+
 /* ── Durga Puja carousel (22 images) ── */
 export const DURGA_PUJA_IMAGES = [
   "/images/Durga_puja/1000163146.jpg",

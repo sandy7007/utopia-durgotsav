@@ -11,6 +11,7 @@ import Sponsors from "./components/Sponsors";
 import Gallery from "./components/Gallery";
 import Schedule from "./components/Schedule";
 import Forms from "./components/Forms";
+import Dandiya from "./components/Dandiya";
 import Footer from "./components/Footer";
 import { HERO_BG_IMAGE, ABOUT_IMAGE, GALLERY_IMAGES } from "./constants/images";
 import { EVENT_SECTIONS } from "./constants/events";
@@ -53,6 +54,7 @@ export default function App() {
       ))}
 
       <Gallery images={GALLERY_IMAGES} />
+      <Dandiya />
       <Sponsors />
       <Schedule />
       <Forms />

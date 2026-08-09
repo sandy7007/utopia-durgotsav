@@ -607,7 +607,7 @@ export default function Forms() {
                       {/* ── Payment section ── */}
                       <div className="form-payment-section">
                         <p className="form-payment-title">
-                          Membership Fee Payment
+                          Membership Fee Payment (1000 rs)
                         </p>
                         <p className="form-payment-note">
                           Scan the QR to pay, then provide either your

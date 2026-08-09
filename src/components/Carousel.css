@@ -1,7 +1,7 @@
 .carousel {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 6/3;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
@@ -210,7 +210,7 @@
 
 @media (max-width: 500px) {
   .carousel {
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/2;
   }
   .carousel-btn {
     opacity: 1;
