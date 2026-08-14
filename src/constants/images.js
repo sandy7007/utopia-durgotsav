@@ -12,10 +12,10 @@ export const DANDIYA_IMAGES = [
   "/images/Dandiya/dandiya.jpg",
   "/images/Durga_puja/1000163252.jpg",
   "/images/Durga_puja/1000163264.jpg",
-  "/images/Dandiya/dandiya-2.jpg",
-  "/images/Dandiya/dandiya-3.jpg",
-  "/images/Dandiya/dandiya-4.jpg",
-  "/images/Dandiya/dandiya-5.jpg",
+  "/images/Dandiya/dandiya-2.JPG",
+  "/images/Dandiya/dandiya-3.JPG",
+  "/images/Dandiya/dandiya-4.JPG",
+  "/images/Dandiya/dandiya-5.JPG",
 ];
 
 /* ── Durga Puja carousel (22 images) ── */
