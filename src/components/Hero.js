@@ -197,7 +197,7 @@ export default function Hero({ heroBgImage, onPayClick }) {
               <rect x="2" y="5" width="20" height="14" rx="2" />
               <path d="M2 10h20" />
             </svg>
-            Pay / Donate
+            Contribute
           </button>
         </motion.div>
       </div>

@@ -205,7 +205,7 @@ export default function PayModal({ isOpen, onClose }) {
               <path d="M9 7h6M9 11h6M9 15h4" />
             </svg>
             <span className="pay-modal-title-text">
-              <strong>Pay &amp; Donate</strong>
+              <strong>Pay &amp; Contribute</strong>
               <em>Scan QR · Use UPI</em>
             </span>
           </div>

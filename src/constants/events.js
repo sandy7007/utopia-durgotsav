@@ -94,6 +94,7 @@ export const SCHEDULE = [
         events: [
           "Special aarti and bhog offering",
           "Most awaited Dandiya Dance & Bollywood Night",
+          "Community Lunch (Paid) \u2013 12:30 PM to 3:30 PM",
         ],
       },
       {
@@ -102,7 +103,6 @@ export const SCHEDULE = [
         events: [
           "Sindoor Khela (vermilion ceremony)",
           "Bisarjan procession with dhak beats",
-          "Community feast & farewell",
         ],
       },
     ],
@@ -114,7 +114,7 @@ export const SCHEDULE = [
     days: [
       {
         day: "Amavasya Eve",
-        date: "Nov 19, 2026",
+        date: "Nov 08, 2026",
         events: [
           "Decoration & lamp-lighting of pandal",
           "Evening bhajan & kirtan",
@@ -122,11 +122,10 @@ export const SCHEDULE = [
       },
       {
         day: "Kali Puja Night",
-        date: "Nov 20, 2026",
+        date: "Nov 09, 2026",
         events: [
           "Main puja begins at midnight",
           "Earthen lamp rows lit across the premises",
-          "Devotional singing until dawn",
         ],
       },
     ],
@@ -138,7 +137,7 @@ export const SCHEDULE = [
     days: [
       {
         day: "Vasant Panchami",
-        date: "Jan 22, 2027",
+        date: "Feb 11, 2027",
         events: [
           "Students offer books for blessing",
           "Pushpanjali in the morning",

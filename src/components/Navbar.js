@@ -122,7 +122,7 @@ export default function Navbar({ onPayClick }) {
               <button
                 className="nav-pay-btn"
                 onClick={openPay}
-                aria-label="Open payment scanner"
+                aria-label="Contribute or donate"
               >
                 <svg
                   className="nav-pay-icon"
@@ -135,7 +135,7 @@ export default function Navbar({ onPayClick }) {
                   <rect x="2" y="5" width="20" height="14" rx="2" />
                   <path d="M2 10h20" />
                 </svg>
-                Pay / Donate
+                Contribute
               </button>
             </li>
           </ul>
