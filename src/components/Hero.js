@@ -158,8 +158,11 @@ export default function Hero({ heroBgImage, onPayClick }) {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="#gallery" className="hero-btn hero-btn--ghost">
+          <a href="#gallery" className="hero-btn hero-btn--ghost hero-gallery-desktop">
             View Gallery
+          </a>
+          <a href="#forms" className="hero-btn hero-btn--ghost hero-forms-mobile">
+            Forms
           </a>
           {ANNOUNCEMENT_BUTTON.enabled && (
             <a

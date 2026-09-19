@@ -88,9 +88,45 @@ export default function Navbar({ onPayClick }) {
     };
   }, [menuOpen]);
 
-  const handleClick = (href) => {
+  const scrollToSection = (href) => {
+    const targetId = href.slice(1);
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const topbarHeight =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--topbar-h",
+        ),
+      ) || 0;
+    const navHeight = navRef.current?.offsetHeight || 0;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY;
+    const offset = topbarHeight + navHeight + 12;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop - offset),
+      behavior: "smooth",
+    });
+    setActive(targetId);
+  };
+
+  useEffect(() => {
+    const scrollFromHash = () => {
+      if (!window.location.hash) return;
+      requestAnimationFrame(() => scrollToSection(window.location.hash));
+    };
+
+    scrollFromHash();
+    window.addEventListener("hashchange", scrollFromHash);
+
+    return () => window.removeEventListener("hashchange", scrollFromHash);
+  }, []);
+
+  const handleClick = (event, href) => {
+    event.preventDefault();
     setMenuOpen(false);
-    setActive(href.slice(1));
+    window.history.replaceState(null, "", href);
+    requestAnimationFrame(() => scrollToSection(href));
   };
 
   return (
@@ -112,7 +148,7 @@ export default function Navbar({ onPayClick }) {
                   className={
                     active === href.slice(1) ? "nav-link active" : "nav-link"
                   }
-                  onClick={() => handleClick(href)}
+                  onClick={(event) => handleClick(event, href)}
                 >
                   {label}
                 </a>

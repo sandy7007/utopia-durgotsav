@@ -99,9 +99,11 @@ function FieldError({ msg }) {
   );
 }
 
+const DEFAULT_TAB = TABS.find((tab) => !tab.disabled)?.key || "";
+
 /* ─── Main component ─────────────────────────────────────────── */
 export default function Forms() {
-  const [activeTab, setActiveTab] = useState("cultural");
+  const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -176,9 +178,10 @@ export default function Forms() {
         const e = validateImageFile(imgFile);
         if (e) errs.imageProof = e;
       }
-      /* Payment: either transaction ID or screenshot */
-      const payTxn = get("paymentTransactionId");
+      /* Payment: screenshot only */
+      // const payTxn = get("paymentTransactionId");
       const payFile = form.elements.paymentProof?.files?.[0];
+      // const hasPaymentDetails = Boolean(payTxn || payFile);
       const payDate = get("paymentDate");
       const today = new Date().toISOString().slice(0, 10);
       if (!payDate) errs.paymentDate = "Required";
@@ -186,10 +189,8 @@ export default function Forms() {
         errs.paymentDate = "Date cannot be before 01 Jan 2026";
       else if (payDate > today)
         errs.paymentDate = "Date cannot be in the future";
-      if (!payTxn && !payFile) {
-        errs.paymentTransactionId =
-          "Provide Transaction ID or upload a screenshot";
-        errs.paymentProof = "Provide Transaction ID or upload a screenshot";
+      if (!payFile) {
+        errs.paymentProof = "Please upload a payment screenshot";
       } else {
         if (payFile) {
           const ep = validateImageFile(payFile);
@@ -316,14 +317,14 @@ export default function Forms() {
     const get = (k) => String(fd.get(k) || "").trim();
     switch (activeTab) {
       case "registration": {
-        const txn = get("paymentTransactionId");
+        // const txn = get("paymentTransactionId");
         const pDate = get("paymentDate");
         return {
           block: get("block"),
           tower: get("tower"),
           apartment: get("apartment"),
           transactionDate: pDate || "NA",
-          transactionId: txn || "NA",
+          // transactionId: txn || "NA",
         };
       }
       case "cultural":
@@ -402,7 +403,7 @@ export default function Forms() {
             >
               {tab.label}
               {tab.disabled && (
-                <span className="tab-coming-soon">Coming Soon</span>
+                <span className="tab-coming-soon">Closed</span>
               )}
             </button>
           ))}
@@ -665,13 +666,13 @@ export default function Forms() {
                         <FieldError msg={errors.paymentDate} />
                       </div>
 
+                      {/*
                       <div className="form-row">
                         <label htmlFor="paymentTransactionId">
                           Transaction ID{" "}
                           <span className="form-either">
-                            (or screenshot below)
-                          </span>{" "}
-                          <span className="req">*</span>
+                            (optional if screenshot is provided)
+                          </span>
                         </label>
                         <input
                           id="paymentTransactionId"
@@ -685,24 +686,18 @@ export default function Forms() {
                         />
                         <FieldError msg={errors.paymentTransactionId} />
                       </div>
+                      */}
 
                       <div className="form-row">
                         <label htmlFor="paymentProof">
-                          Payment Screenshot{" "}
-                          <span className="form-either">
-                            (or Transaction ID above)
-                          </span>{" "}
-                          <span className="req">*</span>
+                          Payment Screenshot <span className="req">*</span>
                         </label>
                         <input
                           id="paymentProof"
                           type="file"
                           name="paymentProof"
                           accept=".png,.jpg,.jpeg,image/png,image/jpeg"
-                          onChange={() => {
-                            clearErr("paymentProof");
-                            clearErr("paymentTransactionId");
-                          }}
+                          onChange={() => clearErr("paymentProof")}
                           className="file-input"
                         />
                         <span className="form-help">

@@ -5,9 +5,12 @@ export const FORM_API_ENDPOINT =
 /* ─── Tabs ────────────────────────────────────────────────────── */
 // change the disabled to false or remove the disabled property to enable a form tab
 export const TABS = [
-  { key: "registration", label: "Member Registration", disabled: false },
-  { key: "cultural", label: "Cultural" },
-  { key: "pujaRituals", label: "Puja Rituals", disabled: false },
+  {
+    key: "registration",
+    label: "Committee Member Registration",
+    disabled: false,
+  },
+  { key: "cultural", label: "Cultural event(2026)", disabled: true },
   //   { key: "bhogCoupons", label: "Bhog Coupons", disabled: false },
   //   { key: "events", label: "Events", disabled: true },
 ];
@@ -29,15 +32,14 @@ export function getTowersForBlock(block) {
 
 /* ─── Contribution types (Pay / Donate modal) ─────────────────── */
 export const CONTRIBUTION_TYPES = [
-  { label: "Saree", price: 1500 },
-  { label: "Ashtami Sondhi Puja", price: 2100 },
-  { label: "Sindoor Khela", price: 501 },
-  { label: "Dhunuchi Naach", price: 501 },
-  { label: "Pushpanjali", price: 251 },
-  { label: "Bhog Sponsorship", price: 5100 },
-  { label: "Pandal Decoration", price: 2100 },
-  { label: "Cultural Programme Sponsor", price: 3100 },
-  { label: "General Donation", price: null },
+  { label: "Dasha Karma", price: 3001 },
+  { label: "Puja sweets", price: 5001 },
+  { label: "Puja Flower", price: 4001 },
+  { label: "Saree Nivedan", price: 5001 },
+  { label: "Maa-er Puja Bhog", price: 5001 },
+  { label: "Sandhi Puja", price: 10001 },
+  { label: "Community Bhog Sponsorship", price: 10001 },
+  { label: "Visarjan Sweets", price: 5001 },
 ];
 
 /* ─── Validation regexes ──────────────────────────────────────── */

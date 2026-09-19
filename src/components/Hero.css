@@ -426,6 +426,10 @@
   display: none;
 }
 
+.hero-forms-mobile {
+  display: none;
+}
+
 /* ── Announcement CTA button ── */
 .hero-btn--announce {
   position: relative;
@@ -664,6 +668,14 @@
 /* Show mobile pay button when navbar collapses to hamburger */
 @media (max-width: 880px) {
   .hero-pay-mobile {
+    display: inline-flex;
+  }
+
+  .hero-gallery-desktop {
+    display: none;
+  }
+
+  .hero-forms-mobile {
     display: inline-flex;
   }
 }
