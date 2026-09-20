@@ -53,6 +53,13 @@
   margin-bottom: 2.5rem;
 }
 
+.forms-tablist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
 .forms-tab-btn {
   padding: 0.5rem 1.4rem;
   border-radius: 50px;
@@ -76,6 +83,20 @@
   border-color: transparent;
   color: #fff;
   box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+}
+
+.forms-tab-btn--contribution {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  border-color: transparent;
+  color: #1a0a00;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.28);
+}
+
+.forms-tab-btn--contribution:hover {
+  color: #1a0a00;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.38);
 }
 
 .forms-tab-btn.disabled,

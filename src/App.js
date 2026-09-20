@@ -57,7 +57,7 @@ export default function App() {
       <Dandiya />
       <Sponsors />
       <Schedule />
-      <Forms />
+      <Forms onPayClick={openPay} />
       <Footer />
       <PayModal isOpen={payOpen} onClose={closePay} />
       {showTop && (

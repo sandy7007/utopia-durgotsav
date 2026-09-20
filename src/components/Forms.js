@@ -102,7 +102,7 @@ function FieldError({ msg }) {
 const DEFAULT_TAB = TABS.find((tab) => !tab.disabled)?.key || "";
 
 /* ─── Main component ─────────────────────────────────────────── */
-export default function Forms() {
+export default function Forms({ onPayClick }) {
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -389,24 +389,33 @@ export default function Forms() {
         </motion.div>
 
         {/* Tab switcher */}
-        <div className="forms-tabs" role="tablist" aria-label="Form types">
-          {TABS.map((tab) => (
-            <button
-              key={tab.key}
-              type="button"
-              role="tab"
-              aria-selected={activeTab === tab.key}
-              aria-disabled={tab.disabled}
-              disabled={tab.disabled}
-              className={`forms-tab-btn${activeTab === tab.key ? " active" : ""}${tab.disabled ? " disabled" : ""}`}
-              onClick={() => !tab.disabled && setActiveTab(tab.key)}
-            >
-              {tab.label}
-              {tab.disabled && (
-                <span className="tab-coming-soon">Closed</span>
-              )}
-            </button>
-          ))}
+        <div className="forms-tabs">
+          <div className="forms-tablist" role="tablist" aria-label="Form types">
+            {TABS.map((tab) => (
+              <button
+                key={tab.key}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === tab.key}
+                aria-disabled={tab.disabled}
+                disabled={tab.disabled}
+                className={`forms-tab-btn${activeTab === tab.key ? " active" : ""}${tab.disabled ? " disabled" : ""}`}
+                onClick={() => !tab.disabled && setActiveTab(tab.key)}
+              >
+                {tab.label}
+                {tab.disabled && (
+                  <span className="tab-coming-soon">Closed</span>
+                )}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="forms-tab-btn forms-tab-btn--contribution"
+            onClick={onPayClick}
+          >
+            Contribution
+          </button>
         </div>
 
         {/* Form card */}
