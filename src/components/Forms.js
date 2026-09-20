@@ -12,6 +12,7 @@ import {
   EMAIL_RE,
   APT_RE,
 } from "../constants/forms";
+import { getLocalDateInputValue } from "../utils/date";
 
 function validateImageFile(file) {
   if (!file) return null;
@@ -183,7 +184,7 @@ export default function Forms({ onPayClick }) {
       const payFile = form.elements.paymentProof?.files?.[0];
       // const hasPaymentDetails = Boolean(payTxn || payFile);
       const payDate = get("paymentDate");
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getLocalDateInputValue();
       if (!payDate) errs.paymentDate = "Required";
       else if (payDate < "2026-01-01")
         errs.paymentDate = "Date cannot be before 01 Jan 2026";
@@ -668,7 +669,7 @@ export default function Forms({ onPayClick }) {
                           id="paymentDate"
                           type="date"
                           name="paymentDate"
-                          max={new Date().toISOString().slice(0, 10)}
+                          max={getLocalDateInputValue()}
                           min="2026-01-01"
                           onChange={() => clearErr("paymentDate")}
                         />

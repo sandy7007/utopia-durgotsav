@@ -4,6 +4,7 @@ import {
   getTowersForBlock,
   CONTRIBUTION_TYPES,
 } from "../constants/forms";
+import { getLocalDateInputValue } from "../utils/date";
 import "./PayModal.css";
 
 export default function PayModal({ isOpen, onClose }) {
@@ -78,7 +79,7 @@ export default function PayModal({ isOpen, onClose }) {
       email,
     } = don;
     const errs = {};
-    const today = new Date().toISOString().slice(0, 10);
+    const today = getLocalDateInputValue();
 
     if (!fullName.trim()) errs.fullName = "Required";
     else if (!/^[A-Za-z\s'-]+$/.test(fullName.trim()))
@@ -442,7 +443,7 @@ export default function PayModal({ isOpen, onClose }) {
                 type="date"
                 value={don.transactionDate}
                 min="2026-04-01"
-                max={new Date().toISOString().slice(0, 10)}
+                max={getLocalDateInputValue()}
                 onChange={(e) => {
                   setDon((p) => ({ ...p, transactionDate: e.target.value }));
                   setDonErrors((p) => {
