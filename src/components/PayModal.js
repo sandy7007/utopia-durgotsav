@@ -12,6 +12,8 @@ export default function PayModal({ isOpen, onClose }) {
     fullName: "",
     phone: "",
     email: "",
+    name: "",
+    gotra: "",
     transactionDate: "",
     amount: "",
     transactionId: "",
@@ -25,13 +27,27 @@ export default function PayModal({ isOpen, onClose }) {
   const [donLoading, setDonLoading] = useState(false);
   const [donSuccess, setDonSuccess] = useState(false);
   const [donTowers, setDonTowers] = useState([]);
+  const [upiCopied, setUpiCopied] = useState(false);
   const donFileRef = useRef(null);
+  const upiCopyTimerRef = useRef(null);
+
+  const showUpiCopied = useCallback(() => {
+    setUpiCopied(true);
+    if (upiCopyTimerRef.current) clearTimeout(upiCopyTimerRef.current);
+    upiCopyTimerRef.current = setTimeout(() => setUpiCopied(false), 1500);
+  }, []);
 
   const handleClose = useCallback(() => {
+    if (upiCopyTimerRef.current) {
+      clearTimeout(upiCopyTimerRef.current);
+      upiCopyTimerRef.current = null;
+    }
     setDon({
       fullName: "",
       phone: "",
       email: "",
+      name: "",
+      gotra: "",
       transactionDate: "",
       amount: "",
       transactionId: "",
@@ -44,6 +60,7 @@ export default function PayModal({ isOpen, onClose }) {
     setDonErrors({});
     setDonSuccess(false);
     setDonTowers([]);
+    setUpiCopied(false);
     if (donFileRef.current) donFileRef.current.value = "";
     onClose();
   }, [onClose]);
@@ -73,6 +90,8 @@ export default function PayModal({ isOpen, onClose }) {
       block,
       tower,
       fullName,
+      name,
+      gotra,
       apartment,
       donationType,
       phone,
@@ -84,6 +103,16 @@ export default function PayModal({ isOpen, onClose }) {
     if (!fullName.trim()) errs.fullName = "Required";
     else if (!/^[A-Za-z\s'-]+$/.test(fullName.trim()))
       errs.fullName = "Letters, spaces, hyphens or apostrophes only";
+
+    // if (donationType.trim()) {
+    //   if (!name.trim()) errs.name = "Required";
+    //   else if (!/^[A-Za-z\s'-]+$/.test(name.trim()))
+    //     errs.name = "Letters, spaces, hyphens or apostrophes only";
+
+    //   if (!gotra.trim()) errs.gotra = "Required";
+    //   else if (!/^[A-Za-z\s'-]+$/.test(gotra.trim()))
+    //     errs.gotra = "Letters, spaces, hyphens or apostrophes only";
+    // }
 
     if (!transactionDate) errs.transactionDate = "Required";
     else if (transactionDate < "2026-04-01")
@@ -144,6 +173,8 @@ export default function PayModal({ isOpen, onClose }) {
           body: JSON.stringify({
             formType: "donation",
             fullName: fullName.trim(),
+            name: name.trim() || "NA",
+            gotra: gotra.trim() || "NA",
             mobile: phone.trim() ? `+91${phone.trim()}` : "NA",
             email: email.trim() || "NA",
             block: block || "NA",
@@ -164,6 +195,8 @@ export default function PayModal({ isOpen, onClose }) {
         fullName: "",
         phone: "",
         email: "",
+        name: "",
+        gotra: "",
         transactionDate: "",
         amount: "",
         transactionId: "",
@@ -244,9 +277,10 @@ export default function PayModal({ isOpen, onClose }) {
             type="button"
             className="pay-upi-copy"
             onClick={() =>
-              navigator.clipboard.writeText(
-                "msutopiadurgotsavcommittee.eazypay@icici",
-              )
+              navigator.clipboard
+                .writeText("msutopiadurgotsavcommittee.eazypay@icici")
+                .then(showUpiCopied)
+                .catch(() => showUpiCopied())
             }
             title="Copy UPI ID"
             aria-label="Copy UPI ID"
@@ -262,6 +296,7 @@ export default function PayModal({ isOpen, onClose }) {
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
             </svg>
           </button>
+          {upiCopied && <span className="pay-upi-copied">Copied</span>}
         </div>
 
         <p className="pay-modal-hint">
@@ -291,13 +326,25 @@ export default function PayModal({ isOpen, onClose }) {
         ) : (
           <form className="don-form" onSubmit={handleDonSubmit} noValidate>
             <div className="don-row">
-              <label>Type of Contribution</label>
+              <label>Type of Contribution (Puja Rituals / General)</label>
               <select
                 value={don.donationType}
                 disabled={!CONTRIBUTION_TYPES.length}
-                onChange={(e) =>
-                  setDon((p) => ({ ...p, donationType: e.target.value }))
-                }
+                onChange={(e) => {
+                  const donationType = e.target.value;
+                  setDon((p) => ({
+                    ...p,
+                    donationType,
+                    name: donationType ? p.name : "",
+                    gotra: donationType ? p.gotra : "",
+                  }));
+                  setDonErrors((p) => {
+                    const n = { ...p };
+                    delete n.name;
+                    delete n.gotra;
+                    return n;
+                  });
+                }}
               >
                 <option value="">Please select (optional)</option>
                 {CONTRIBUTION_TYPES.map(({ label, price }) => (
@@ -326,6 +373,49 @@ export default function PayModal({ isOpen, onClose }) {
                   });
                 }}
               />
+
+              <div className="don-row">
+                <label>Name (To be used for Puja Rituals)</label>
+                <input
+                  type="text"
+                  placeholder="Enter name"
+                  value={don.name}
+                  disabled={!don.donationType}
+                  autoComplete="name"
+                  onChange={(e) => {
+                    setDon((p) => ({ ...p, name: e.target.value }));
+                    setDonErrors((p) => {
+                      const n = { ...p };
+                      delete n.name;
+                      return n;
+                    });
+                  }}
+                />
+                {donErrors.name && (
+                  <span className="don-field-error">{donErrors.name}</span>
+                )}
+              </div>
+
+              <div className="don-row">
+                <label>Gotra (To be used for Puja Rituals)</label>
+                <input
+                  type="text"
+                  placeholder="Enter gotra"
+                  value={don.gotra}
+                  disabled={!don.donationType}
+                  onChange={(e) => {
+                    setDon((p) => ({ ...p, gotra: e.target.value }));
+                    setDonErrors((p) => {
+                      const n = { ...p };
+                      delete n.gotra;
+                      return n;
+                    });
+                  }}
+                />
+                {donErrors.gotra && (
+                  <span className="don-field-error">{donErrors.gotra}</span>
+                )}
+              </div>
               {donErrors.fullName && (
                 <span className="don-field-error">{donErrors.fullName}</span>
               )}

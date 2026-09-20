@@ -198,6 +198,14 @@
   height: 15px;
 }
 
+.pay-upi-copied {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffd700;
+  letter-spacing: 0.04em;
+}
+
 @keyframes noticeGlow {
   0%,
   100% {
