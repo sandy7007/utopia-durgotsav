@@ -465,6 +465,8 @@ export default function Forms({ onPayClick }) {
 
               {activeTab !== "cultural" && (
                 <form ref={formRef} onSubmit={handleSubmit} noValidate>
+                  <h3 className="forms-card-title">{tabLabel}</h3>
+
                   {/* ── Common fields ── */}
                   <div className="form-row">
                     <label htmlFor="fullName">
