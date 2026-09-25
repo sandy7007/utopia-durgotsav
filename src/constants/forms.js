@@ -32,6 +32,7 @@ export function getTowersForBlock(block) {
 
 /* ─── Contribution types (Pay / Donate modal) ─────────────────── */
 export const CONTRIBUTION_TYPES = [
+  { label: "General Contribution" },
   { label: "Dasha Karma / Puja Samagri items (one day)", price: 3001 },
   { label: "Puja sweets (one day)", price: 5001 },
   { label: "Puja Flower (one day)", price: 4001 },
