@@ -374,50 +374,55 @@ export default function PayModal({ isOpen, onClose }) {
                 }}
               />
 
-              {don.donationType && don.donationType !== "General Contribution" && (
-                <>
-                  <div className="don-row">
-                    <label>Name (To be used for Puja Rituals)</label>
-                    <input
-                      type="text"
-                      placeholder="Enter name"
-                      value={don.name}
-                      autoComplete="name"
-                      onChange={(e) => {
-                        setDon((p) => ({ ...p, name: e.target.value }));
-                        setDonErrors((p) => {
-                          const n = { ...p };
-                          delete n.name;
-                          return n;
-                        });
-                      }}
-                    />
-                    {donErrors.name && (
-                      <span className="don-field-error">{donErrors.name}</span>
-                    )}
-                  </div>
+              {don.donationType &&
+                don.donationType !== "General Contribution" && (
+                  <>
+                    <div className="don-row">
+                      <label>Name (To be used for Puja Rituals)</label>
+                      <input
+                        type="text"
+                        placeholder="Enter name"
+                        value={don.name}
+                        autoComplete="name"
+                        onChange={(e) => {
+                          setDon((p) => ({ ...p, name: e.target.value }));
+                          setDonErrors((p) => {
+                            const n = { ...p };
+                            delete n.name;
+                            return n;
+                          });
+                        }}
+                      />
+                      {donErrors.name && (
+                        <span className="don-field-error">
+                          {donErrors.name}
+                        </span>
+                      )}
+                    </div>
 
-                  <div className="don-row">
-                    <label>Gotra (To be used for Puja Rituals)</label>
-                    <input
-                      type="text"
-                      placeholder="Enter gotra"
-                      value={don.gotra}
-                      onChange={(e) => {
-                        setDon((p) => ({ ...p, gotra: e.target.value }));
-                        setDonErrors((p) => {
-                          const n = { ...p };
-                          delete n.gotra;
-                          return n;
-                        });
-                      }}
-                    />
-                    {donErrors.gotra && (
-                      <span className="don-field-error">{donErrors.gotra}</span>
-                    )}
-                  </div>
-                </>
-              )}
+                    <div className="don-row">
+                      <label>Gotra (To be used for Puja Rituals)</label>
+                      <input
+                        type="text"
+                        placeholder="Enter gotra"
+                        value={don.gotra}
+                        onChange={(e) => {
+                          setDon((p) => ({ ...p, gotra: e.target.value }));
+                          setDonErrors((p) => {
+                            const n = { ...p };
+                            delete n.gotra;
+                            return n;
+                          });
+                        }}
+                      />
+                      {donErrors.gotra && (
+                        <span className="don-field-error">
+                          {donErrors.gotra}
+                        </span>
+                      )}
+                    </div>
+                  </>
+                )}
               {donErrors.fullName && (
                 <span className="don-field-error">{donErrors.fullName}</span>
               )}
